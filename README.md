@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+<div align="center"><img src="src/assets/img/logo-img-acima4.png" width="500px"></div>
+
+
+# Organize sua vida cultural com Cine-Book Club
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
