@@ -1,7 +1,7 @@
 <div align="center"><img src="src/assets/img/logo-img-acima4.png" width="420px">
 <h1 margin-top="-100px"> </h1>
 
-Organize your cultural life with Cine-Book Club
+Organize your cultural life with Cine-Book Club!
   <br>
   </div>
 </div>
