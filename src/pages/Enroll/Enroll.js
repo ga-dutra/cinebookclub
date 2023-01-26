@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import newlogo from "../../assets/img/newlogo.png";
 import logo_img_acima4 from "../../assets/img/logo-img-acima4.png";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +21,8 @@ export default function Enroll() {
 
   return (
     <Wrapper>
-      <Logo src={logo_img_acima4} alt="Cine-book club logo" />
+      <Logo src={newlogo} alt="Cine-book club logo" />
+      {/* <Description>CADASTRO</Description> */}
       <FormWrapper onSubmit={submitForm}>
         <input
           placeholder="E-mail"
@@ -58,7 +60,8 @@ export default function Enroll() {
   );
 }
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
+  background-color: #fddacf;
   background-color: #ffd7ba;
   display: flex;
   flex-direction: column;
@@ -69,11 +72,12 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   max-width: 120vw;
+  margin-top: -80px;
 `;
 
-const FormWrapper = styled.form`
+export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -82,7 +86,8 @@ const FormWrapper = styled.form`
     height: 48px;
     margin-bottom: 12px;
     background-color: #ffe5d9;
-    border: solid #e8e8e4;
+    border: solid #fcd5ce;
+    box-shadow: 1px 1px -1px -1px rgba(0, 0, 0, 0.03);
     border-radius: 5px;
     padding-left: 12px;
     font-family: "Raleway", sans-serif;
@@ -115,10 +120,18 @@ const FormWrapper = styled.form`
   }
 `;
 
-const Link = styled.p`
+export const Link = styled.p`
   margin-top: 12px;
   font-size: 18px;
   font-family: "Raleway", sans-serif;
   color: #495057;
   cursor: pointer;
+`;
+
+export const Description = styled.p`
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #d90429;
+  margin: -30px 0 10px 0;
 `;
