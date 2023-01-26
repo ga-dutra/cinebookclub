@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const UserContext = createContext();
 
 const UserStorage = ({ children }) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useLocalStorage("userData", {});
   const [menuClicked, setMenuClicked] = useState("");
 
   return (

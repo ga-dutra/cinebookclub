@@ -5,6 +5,8 @@ import Home from "../pages/Home/Home";
 import Enroll from "../pages/Enroll/Enroll";
 import SignIn from "../pages/SignIn/SignIn";
 import { ToastContainer } from "react-toastify";
+import useToken from "../hooks/useToken";
+import { Navigate } from "react-router-dom";
 
 export default function App() {
   return (
@@ -14,7 +16,14 @@ export default function App() {
       <UserStorage>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRouteGuard>
+                  <Home />
+                </ProtectedRouteGuard>
+              }
+            />
             <Route path="/sign-up" element={<Enroll />} />
             <Route path="/login" element={<SignIn />} />
           </Routes>
@@ -22,4 +31,14 @@ export default function App() {
       </UserStorage>
     </>
   );
+}
+
+function ProtectedRouteGuard({ children }) {
+  const token = useToken();
+  console.log(token);
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
 }

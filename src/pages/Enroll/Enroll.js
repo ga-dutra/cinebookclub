@@ -11,13 +11,17 @@ export default function Enroll() {
   async function submitForm(event) {
     event.preventDefault();
     const body = { ...form };
-    try {
-      await postSignUp(body);
-      toast("Cadastro realizado com sucesso!");
-      navigate("/login");
-    } catch (error) {
-      toast("Houve um erro ao realizar o cadastro. Tente novamente!");
-      console.log(error.message);
+    if (body.password !== body.confirmed_password) {
+      toast("As senhas precisam ser iguais!");
+    } else {
+      try {
+        await postSignUp(body);
+        toast("Cadastro realizado com sucesso!");
+        navigate("/login");
+      } catch (error) {
+        toast("Houve um erro ao realizar o cadastro. Tente novamente!");
+        console.log(error.message);
+      }
     }
   }
 

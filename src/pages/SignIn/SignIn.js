@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import newlogo from "../../assets/img/newlogo.png";
 import { useNavigate } from "react-router-dom";
 import { postSignIn } from "../../services/services";
@@ -12,15 +12,18 @@ import {
   Link,
   Description,
 } from "../Enroll/Enroll.js";
+import { UserContext } from "../../contexts/userContext";
 
 export default function SignIn() {
+  const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({});
   async function submitForm(event) {
     event.preventDefault();
     const body = { ...form };
     try {
-      await postSignIn(body);
+      const userData = await postSignIn(body);
+      setUserData(userData);
       toast("Login realizado com sucesso!");
       navigate("/");
     } catch (error) {
