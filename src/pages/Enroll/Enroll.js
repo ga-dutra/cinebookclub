@@ -2,14 +2,23 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import newlogo from "../../assets/img/newlogo.png";
-import logo_img_acima4 from "../../assets/img/logo-img-acima4.png";
 import { useNavigate } from "react-router-dom";
+import { postSignUp } from "../../services/services";
 
 export default function Enroll() {
   const navigate = useNavigate();
   const [form, setForm] = useState({});
-  function submitForm(event) {
+  async function submitForm(event) {
     event.preventDefault();
+    const body = { ...form };
+    try {
+      await postSignUp(body);
+      toast("Cadastro realizado com sucesso!");
+      navigate("/login");
+    } catch (error) {
+      toast("Houve um erro ao realizar o cadastro. Tente novamente!");
+      console.log(error.message);
+    }
   }
 
   function handleForm({ value, name }) {
