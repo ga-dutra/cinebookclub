@@ -12,4 +12,17 @@ async function postSignIn(body) {
   return response.data;
 }
 
-export { postSignUp, postSignIn };
+async function getApiBooks(search) {
+  const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
+  let response;
+  try {
+    response = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&orderBy=relevance&maxResults=5&key=${api_key}`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+}
+
+export { postSignUp, postSignIn, getApiBooks };

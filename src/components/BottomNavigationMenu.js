@@ -22,7 +22,9 @@ function MenuIcon({ outlineIcon, fullIcon, name }) {
       <ion-icon
         name={isClicked && menuClicked === name ? fullIcon : outlineIcon}
       ></ion-icon>
-      <IconName>{name}</IconName>
+      <IconName menuClicked={menuClicked} name={name}>
+        {name}
+      </IconName>
     </IconWrapper>
   );
 }
@@ -86,6 +88,7 @@ const IconWrapper = styled.div`
 `;
 
 const IconName = styled.h1`
-  font-family: "Righteous", cursive;
-  font-size: 18px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  font-weight: ${(props) => (props.menuClicked === props.name ? 700 : 500)};
 `;

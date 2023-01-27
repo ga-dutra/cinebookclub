@@ -1,11 +1,11 @@
-import GlobalStyle from "../styles/globalStyles";
+import GlobalStyle from "./styles/globalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserStorage } from "../contexts/userContext";
-import Home from "../pages/Home/Home";
-import Enroll from "../pages/Enroll/Enroll";
-import SignIn from "../pages/SignIn/SignIn";
+import { UserStorage } from "./contexts/userContext";
+import Home from "./pages/Home/Home";
+import Enroll from "./pages/Enroll/Enroll";
+import SignIn from "./pages/SignIn/SignIn";
 import { ToastContainer } from "react-toastify";
-import useToken from "../hooks/useToken";
+import useToken from "./hooks/useToken";
 import { Navigate } from "react-router-dom";
 
 export default function App() {
@@ -16,8 +16,9 @@ export default function App() {
       <UserStorage>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<LinkToHome />} />
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRouteGuard>
                   <Home />
@@ -35,10 +36,13 @@ export default function App() {
 
 function ProtectedRouteGuard({ children }) {
   const token = useToken();
-  console.log(token);
   if (!token) {
     return <Navigate to="/login" />;
   }
 
   return <>{children}</>;
+}
+
+function LinkToHome() {
+  return <Navigate to="/home" />;
 }

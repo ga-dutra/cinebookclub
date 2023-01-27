@@ -25,7 +25,7 @@ export default function SignIn() {
       const userData = await postSignIn(body);
       setUserData(userData);
       toast("Login realizado com sucesso!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       toast("Houve um erro ao realizar o login. Tente novamente!");
       console.log(error.message);
