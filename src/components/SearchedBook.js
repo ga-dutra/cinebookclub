@@ -1,15 +1,37 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import ConfirmDialog from "./ConfirmDialog";
 
 export default function SearchedBook({ title, author, description, img }) {
-  console.log(img, title);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    message: `Quer adicionar `,
+  });
+
   return (
     <Wrapper>
-      <img src={img} alt="" />
-      <h1>
+      <img
+        onClick={() => {
+          setConfirmDialog({ ...confirmDialog, isOpen: true });
+        }}
+        src={img}
+        alt=""
+      />
+      <h1
+        onClick={() => {
+          setConfirmDialog({ ...confirmDialog, isOpen: true });
+        }}
+      >
         {" "}
         {title} - {author}{" "}
       </h1>
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={img}
+        title={title}
+      />
     </Wrapper>
   );
 }

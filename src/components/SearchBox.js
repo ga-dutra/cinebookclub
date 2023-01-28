@@ -11,7 +11,7 @@ export default function SearchBox() {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState([]);
   const [booksList, setBooksList] = useState([]);
-
+  const [render, setRender] = useState(0);
   useEffect(() => {
     async function updateBooksList() {
       if (search.length > 3) {
@@ -34,6 +34,7 @@ export default function SearchBox() {
           });
         }
         setBooksList(newList);
+        setRender(render + 1);
       } else setBooksList([]);
     }
     updateBooksList();
@@ -75,7 +76,7 @@ export default function SearchBox() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+
   width: 95vw;
   position: relative;
 `;

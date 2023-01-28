@@ -5,24 +5,24 @@ import { UserContext } from "../contexts/userContext";
 
 function MenuIcon({ outlineIcon, fullIcon, name }) {
   const [isClicked, setIsClicked] = useState(false);
-  const { menuClicked, setMenuClicked } = useContext(UserContext);
+  const { bottomMenuSelected, setBottomMenuSelected } = useContext(UserContext);
 
   function clickMenu() {
-    if (menuClicked !== name) {
+    if (bottomMenuSelected !== name) {
       setIsClicked(true);
-      setMenuClicked(name);
+      setBottomMenuSelected(name);
     } else {
       setIsClicked(false);
-      setMenuClicked("");
+      setBottomMenuSelected("");
     }
   }
 
   return (
     <IconWrapper onClick={clickMenu}>
       <ion-icon
-        name={isClicked && menuClicked === name ? fullIcon : outlineIcon}
+        name={isClicked && bottomMenuSelected === name ? fullIcon : outlineIcon}
       ></ion-icon>
-      <IconName menuClicked={menuClicked} name={name}>
+      <IconName bottomMenuSelected={bottomMenuSelected} name={name}>
         {name}
       </IconName>
     </IconWrapper>
@@ -90,5 +90,6 @@ const IconWrapper = styled.div`
 const IconName = styled.h1`
   font-family: "Barlow Condensed", sans-serif;
   font-size: 20px;
-  font-weight: ${(props) => (props.menuClicked === props.name ? 700 : 500)};
+  font-weight: ${(props) =>
+    props.bottomMenuSelected === props.name ? 700 : 500};
 `;

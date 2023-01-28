@@ -1,40 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { UserContext } from "../contexts/userContext";
 
 export default function MainMenu() {
-  const [menuSelected, setMenuSelected] = useState("");
+  const { mainMenuSelected, setMainMenuSelected } = useContext(UserContext);
   return (
     <MenuWrapper>
       <MenuOption
         name={"LIDOS/ASSISTIDOS"}
-        setMenuSelected={setMenuSelected}
-        menuSelected={menuSelected}
+        setMainMenuSelected={setMainMenuSelected}
+        mainMenuSelected={mainMenuSelected}
       ></MenuOption>
       <MenuOption
-        setMenuSelected={setMenuSelected}
-        menuSelected={menuSelected}
+        setMainMenuSelected={setMainMenuSelected}
+        mainMenuSelected={mainMenuSelected}
         name={"LISTA DE DESEJOS"}
       ></MenuOption>
     </MenuWrapper>
   );
 }
 
-function MenuOption({ name, menuSelected, setMenuSelected }) {
+function MenuOption({ name, mainMenuSelected, setMainMenuSelected }) {
   const [isSelected, setIsSelected] = useState(false);
   function selectMenu() {
-    if (menuSelected !== name) {
+    if (mainMenuSelected !== name) {
       setIsSelected(true);
-      setMenuSelected(name);
+      setMainMenuSelected(name);
     } else {
       setIsSelected(!isSelected);
-      setMenuSelected("");
+      setMainMenuSelected("");
     }
   }
   return (
     <OptionWrapper
       onClick={selectMenu}
       isSelected={isSelected}
-      menuSelected={menuSelected}
+      mainMenuSelected={mainMenuSelected}
       name={name}
     >
       {name}
@@ -57,11 +58,11 @@ const OptionWrapper = styled.div`
   width: 132px;
   height: 38px;
   background-color: ${(props) =>
-    props.menuSelected === props.name && props.isSelected
+    props.mainMenuSelected === props.name && props.isSelected
       ? "#59A5D8"
       : "#ece4db"};
   box-shadow: ${(props) =>
-    props.menuSelected === props.name && props.isSelected
+    props.mainMenuSelected === props.name && props.isSelected
       ? "4px 4px 4px rgba(0, 0, 0, 0.25)"
       : "2px 2px 2px rgba(0, 0, 0, 0.25)"};
   border-radius: 5px;

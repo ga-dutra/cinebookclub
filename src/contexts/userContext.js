@@ -5,11 +5,18 @@ const UserContext = createContext();
 
 const UserStorage = ({ children }) => {
   const [userData, setUserData] = useLocalStorage("userData", {});
-  const [menuClicked, setMenuClicked] = useState("");
-
+  const [bottomMenuSelected, setBottomMenuSelected] = useState("");
+  const [mainMenuSelected, setMainMenuSelected] = useState("");
   return (
     <UserContext.Provider
-      value={{ userData, setUserData, menuClicked, setMenuClicked }}
+      value={{
+        userData,
+        setUserData,
+        bottomMenuSelected,
+        setBottomMenuSelected,
+        mainMenuSelected,
+        setMainMenuSelected,
+      }}
     >
       {children}
     </UserContext.Provider>

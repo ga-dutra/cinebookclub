@@ -8,12 +8,14 @@ import BookBox from "../../components/BookBox";
 import SearchBox from "../../components/SearchBox";
 
 export default function Home() {
+  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
   return (
     <Wrapper>
       <Header />
       <MainMenu />
       <BookBox></BookBox>
-      <SearchBox></SearchBox>
+      {bottomMenuSelected === "Livros" ? <SearchBox></SearchBox> : ""}
+
       <BottomNavigationMenu />
     </Wrapper>
   );
