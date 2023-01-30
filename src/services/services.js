@@ -29,7 +29,8 @@ async function getUserReadings(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${baseUrlTest}`, config);
+  const response = await axios.get(`${baseUrlTest}/readings`, config);
+
   return response.data;
 }
 
@@ -45,4 +46,20 @@ async function postNewReading(token, newReading) {
   return response.data;
 }
 
-export { postSignUp, postSignIn, getApiBooks, getUserReadings, postNewReading };
+async function updateGradeOrReviewOrDate(token, book_api_id, data) {
+  const body = { ...data, book_api_id };
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.put(`${baseUrlTest}/readings`, body, config);
+  return response.data;
+}
+
+export {
+  postSignUp,
+  postSignIn,
+  getApiBooks,
+  getUserReadings,
+  postNewReading,
+  updateGradeOrReviewOrDate,
+};

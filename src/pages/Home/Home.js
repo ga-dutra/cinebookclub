@@ -4,7 +4,7 @@ import BottomNavigationMenu from "../../components/BottomNavigationMenu";
 import Header from "../../components/Header";
 import MainMenu from "../../components/MainMenu";
 import { UserContext } from "../../contexts/userContext";
-import BookBox from "../../components/BookBox";
+import Books from "../Books/index.js";
 import SearchBox from "../../components/SearchBox";
 
 export default function Home() {
@@ -13,9 +13,12 @@ export default function Home() {
     <Wrapper>
       <Header />
       <MainMenu />
-      <BookBox></BookBox>
-      {bottomMenuSelected === "Livros" ? <SearchBox></SearchBox> : ""}
-
+      {bottomMenuSelected === "Livros" && mainMenuSelected !== "" ? (
+        <SearchBox></SearchBox>
+      ) : (
+        ""
+      )}
+      {bottomMenuSelected === "Livros" ? <Books></Books> : ""}
       <BottomNavigationMenu />
     </Wrapper>
   );

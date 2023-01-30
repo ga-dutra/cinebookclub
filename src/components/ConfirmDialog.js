@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { SearchContext } from "../contexts/searchContext";
 import useToken from "../hooks/useToken";
 import { postNewReading } from "../services/services";
+import { toast } from "react-toastify";
 
 export default function ConfirmDialog({
   confirmDialog,
@@ -30,6 +31,7 @@ export default function ConfirmDialog({
         ...confirmDialog,
         isOpen: false,
       });
+      toast(`${book.title} adicionado com sucesso!`);
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
