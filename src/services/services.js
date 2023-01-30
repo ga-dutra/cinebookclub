@@ -25,4 +25,24 @@ async function getApiBooks(search) {
   return response;
 }
 
-export { postSignUp, postSignIn, getApiBooks };
+async function getUserReadings(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrlTest}`, config);
+  return response.data;
+}
+
+async function postNewReading(token, newReading) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${baseUrlTest}/readings`,
+    newReading,
+    config
+  );
+  return response.data;
+}
+
+export { postSignUp, postSignIn, getApiBooks, getUserReadings, postNewReading };

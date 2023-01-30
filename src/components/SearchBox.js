@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import { FiSearch } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getApiBooks } from "../services/services";
 import SearchedBook from "./SearchedBook";
+import { SearchContext } from "../contexts/searchContext";
 
 const unavailableImg =
   "https://www.fullperformance.com.br/images/evento/2020-03-01_1a_logo_default3.jpg";
@@ -12,6 +13,8 @@ export default function SearchBox() {
   const [books, setBooks] = useState([]);
   const [booksList, setBooksList] = useState([]);
   const [render, setRender] = useState(0);
+  const { inputCleaner } = useContext(SearchContext);
+
   useEffect(() => {
     async function updateBooksList() {
       if (search.length > 3) {
@@ -28,6 +31,8 @@ export default function SearchBox() {
                   ? book.volumeInfo.imageLinks.thumbnail
                   : unavailableImg,
                 description: book.volumeInfo.description,
+                book_api_id: book.id,
+                page_count: book.volumeInfo.pageCount || "",
               };
               newList.push(bookUnity);
             }
@@ -39,6 +44,10 @@ export default function SearchBox() {
     }
     updateBooksList();
   }, [search]);
+
+  useEffect(() => {
+    setSearch("");
+  }, [inputCleaner]);
 
   return (
     <Wrapper>
@@ -65,6 +74,9 @@ export default function SearchBox() {
                 author={book.author}
                 img={book.img}
                 description={book.description}
+                book_api_id={book.book_api_id}
+                page_count={book.page_count}
+                id={book.id}
               />
             ))
           : ""}

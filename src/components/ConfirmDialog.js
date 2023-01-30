@@ -4,25 +4,51 @@ import {
   DialogContent,
   DialogActions,
 } from "@material-ui/core";
+import { useContext } from "react";
 import styled from "styled-components";
+import { SearchContext } from "../contexts/searchContext";
+import useToken from "../hooks/useToken";
+import { postNewReading } from "../services/services";
 
 export default function ConfirmDialog({
   confirmDialog,
   setConfirmDialog,
-  img,
-  title,
+  book,
 }) {
+  const token = useToken();
+  const { inputCleaner, setInputCleaner } = useContext(SearchContext);
+  function handleConfirmationDialog() {
+    if (confirmDialog.type === "addReading") {
+      addNewReading();
+    }
+  }
+
+  async function addNewReading() {
+    try {
+      await postNewReading(token, book);
+      setConfirmDialog({
+        ...confirmDialog,
+        isOpen: false,
+      });
+      setInputCleaner(!inputCleaner);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Dialog open={confirmDialog.isOpen}>
       <Wrapper>
         <DialogTitle>
-          <BookImage src={img}></BookImage>
+          <BookImage src={book.img}></BookImage>
         </DialogTitle>
         <DialogContent>
-          <h6>{title} ?</h6>
+          <h6>{book.title} ?</h6>
         </DialogContent>
         <DialogActions>
-          <Button color={"green"}>Sim</Button>
+          <Button color={"green"} onClick={handleConfirmationDialog}>
+            Sim
+          </Button>
           <Button
             color={"red"}
             onClick={() =>

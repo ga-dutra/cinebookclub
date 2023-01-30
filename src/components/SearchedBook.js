@@ -3,10 +3,19 @@ import { useState } from "react";
 
 import ConfirmDialog from "./ConfirmDialog";
 
-export default function SearchedBook({ title, author, description, img }) {
+export default function SearchedBook({
+  title,
+  author,
+  description,
+  img,
+  book_api_id,
+  page_count,
+}) {
+  const book = { title, author, description, img, book_api_id, page_count };
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     message: `Quer adicionar `,
+    type: "addReading",
   });
 
   return (
@@ -31,6 +40,7 @@ export default function SearchedBook({ title, author, description, img }) {
         setConfirmDialog={setConfirmDialog}
         img={img}
         title={title}
+        book={book}
       />
     </Wrapper>
   );
