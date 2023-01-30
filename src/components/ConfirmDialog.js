@@ -35,6 +35,14 @@ export default function ConfirmDialog({
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
+      if (error.response.status === 409) {
+        toast(`${book.title} já está na sua lista!`);
+        setConfirmDialog({
+          ...confirmDialog,
+          isOpen: false,
+        });
+        setInputCleaner(!inputCleaner);
+      }
     }
   }
 
