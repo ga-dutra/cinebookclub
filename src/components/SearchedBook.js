@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
-
+import { useState, useContext, useEffect } from "react";
+import { UserContext } from "../contexts/userContext";
 import ConfirmDialog from "./ConfirmDialog";
 
 export default function SearchedBook({
@@ -12,11 +12,23 @@ export default function SearchedBook({
   page_count,
 }) {
   const book = { title, author, description, img, book_api_id, page_count };
-  const [confirmDialog, setConfirmDialog] = useState({
-    isOpen: false,
-    message: `Quer adicionar `,
-    type: "addReading",
-  });
+  const { mainMenuSelected } = useContext(UserContext);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
+  useEffect(() => {
+    if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+      setConfirmDialog({
+        isOpen: false,
+        message: `Quer adicionar `,
+        type: "addReading",
+      });
+    } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+      setConfirmDialog({
+        isOpen: false,
+        message: `Quer adicionar `,
+        type: "addBookWishList",
+      });
+    }
+  }, []);
 
   return (
     <Wrapper>

@@ -35,6 +35,7 @@ async function getUserReadings(token) {
 }
 
 async function postNewReading(token, newReading) {
+  console.log(token);
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -55,6 +56,27 @@ async function updateGradeOrReviewOrDate(token, book_api_id, data) {
   return response.data;
 }
 
+async function getUserBooksWishlist(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrlTest}/books`, config);
+
+  return response.data;
+}
+
+async function postNewBookWishList(token, newBookWishList) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${baseUrlTest}/books`,
+    newBookWishList,
+    config
+  );
+  return response.data;
+}
+
 export {
   postSignUp,
   postSignIn,
@@ -62,4 +84,6 @@ export {
   getUserReadings,
   postNewReading,
   updateGradeOrReviewOrDate,
+  getUserBooksWishlist,
+  postNewBookWishList,
 };

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import BookBox from "../../components/BookBox";
+import BookBox from "../../components/ReadingBox";
 import useToken from "../../hooks/useToken";
 import { getUserReadings } from "../../services/services";
 import LoadingAnimation from "../../common/LoadingAnimation";
@@ -25,6 +24,6 @@ export default function Readings() {
       ))}
     </>
   ) : (
-    <LoadingAnimation />
+    ""
   );
 }

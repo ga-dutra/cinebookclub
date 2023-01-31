@@ -8,7 +8,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../contexts/searchContext";
 import useToken from "../hooks/useToken";
-import { postNewReading } from "../services/services";
+import { postNewReading, postNewBookWishList } from "../services/services";
 import { toast } from "react-toastify";
 
 export default function ConfirmDialog({
@@ -21,12 +21,36 @@ export default function ConfirmDialog({
   function handleConfirmationDialog() {
     if (confirmDialog.type === "addReading") {
       addNewReading();
+    } else if (confirmDialog.type === "addBookWishList") {
+      addBookWishList();
     }
   }
 
   async function addNewReading() {
     try {
       await postNewReading(token, book);
+      setConfirmDialog({
+        ...confirmDialog,
+        isOpen: false,
+      });
+      toast(`${book.title} adicionado com sucesso!`);
+      setInputCleaner(!inputCleaner);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 409) {
+        toast(`${book.title} já está na sua lista!`);
+        setConfirmDialog({
+          ...confirmDialog,
+          isOpen: false,
+        });
+        setInputCleaner(!inputCleaner);
+      }
+    }
+  }
+
+  async function addBookWishList() {
+    try {
+      await postNewBookWishList(token, book);
       setConfirmDialog({
         ...confirmDialog,
         isOpen: false,
