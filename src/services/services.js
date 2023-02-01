@@ -22,11 +22,13 @@ async function getUserReadings(token) {
 }
 
 async function getUserWatchings(token, medias_id) {
-  const body = { medias_id };
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${baseUrlTest}/watchings`, config, body);
+  const response = await axios.get(
+    `${baseUrlTest}/watchings/${medias_id}`,
+    config
+  );
 
   return response.data;
 }
@@ -56,12 +58,21 @@ async function postNewWatching(token, newWatching) {
   return response.data;
 }
 
-async function updateGradeOrReviewOrDate(token, book_api_id, data) {
+async function updateBookGradeOrReviewOrDate(token, book_api_id, data) {
   const body = { ...data, book_api_id };
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.put(`${baseUrlTest}/readings`, body, config);
+  return response.data;
+}
+
+async function updateWatchingGradeOrReviewOrDate(token, api_id, data) {
+  const body = { ...data, api_id };
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.put(`${baseUrlTest}/watchings`, body, config);
   return response.data;
 }
 
@@ -103,7 +114,8 @@ export {
   postSignIn,
   getUserReadings,
   postNewReading,
-  updateGradeOrReviewOrDate,
+  updateBookGradeOrReviewOrDate,
+  updateWatchingGradeOrReviewOrDate,
   getUserBooksWishlist,
   postNewBookWishList,
   postNewFilmWishList,

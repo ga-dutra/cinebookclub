@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 import { useContext, useState } from "react";
-import { DebounceInput } from "react-debounce-input";
 import useToken from "../../hooks/useToken";
-import { updateBookGradeOrReviewOrDate } from "../../services/services";
+import { updateWatchingGradeOrReviewOrDate } from "../../services/services";
 import { toast } from "react-toastify";
 import { SearchContext } from "../../contexts/searchContext";
 
-export default function BookBox({ book }) {
+export default function WatchingBox({ media }) {
   const token = useToken();
   const { setInputCleaner, inputCleaner } = useContext(SearchContext);
-  const [review, setReview] = useState(book.review);
+  const [review, setReview] = useState(media.review);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  console.log(media);
   async function ratingChanged(newRating) {
     try {
-      await updateBookGradeOrReviewOrDate(token, book.book_api_id, {
+      await updateWatchingGradeOrReviewOrDate(token, media.api_id, {
         newGrade: newRating,
+        medias_id: media.medias_id,
       });
       toast("Nota atualizada com sucesso");
     } catch (error) {
@@ -24,10 +25,10 @@ export default function BookBox({ book }) {
   }
   async function updateDate(newDate) {
     try {
-      await updateBookGradeOrReviewOrDate(token, book.book_api_id, {
-        newReadingDate: newDate,
+      await updateWatchingGradeOrReviewOrDate(token, media.api_id, {
+        newWatchingDate: newDate,
+        medias_id: media.medias_id,
       });
-
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
@@ -35,8 +36,9 @@ export default function BookBox({ book }) {
   }
   async function updateReview(newReview) {
     try {
-      await updateBookGradeOrReviewOrDate(token, book.book_api_id, {
+      await updateWatchingGradeOrReviewOrDate(token, media.api_id, {
         newReview: newReview,
+        medias_id: media.medias_id,
       });
       toast("Resenha atualizada com sucesso");
       setInputCleaner(!inputCleaner);
@@ -47,28 +49,28 @@ export default function BookBox({ book }) {
 
   return (
     <Wrapper isDescriptionOpen={isDescriptionOpen}>
-      <BookPicture src={book.img} alt={`${book.title} poster`} />
-      <BookDescription>
-        <h1>{book.title}</h1>
-        <h2>{book.author}</h2>
-      </BookDescription>
+      <MediaPicture src={media.img} alt={`${media.title} poster`} />
+      <MediaDescription>
+        <h1>{media.title}</h1>
+        <h2>Nota média: {media.vote_average}</h2>
+      </MediaDescription>
       <RatingWrapper>
-        <BookDescription>
+        <MediaDescription>
           <h3>
-            <span>Lido em: </span> <br />
+            <span>Assistido em: </span> <br />
             <input
               type="date"
-              value={book.read_at.slice(0, 10)}
+              value={media.watched_at.slice(0, 10)}
               min="2000-01-02"
               onChange={(e) => {
                 updateDate(e.target.value);
               }}
             ></input>
           </h3>
-        </BookDescription>
+        </MediaDescription>
 
         <ReactStars
-          value={Number(book.grade)}
+          value={Number(media.grade)}
           count={5}
           onChange={ratingChanged}
           size={24}
@@ -82,16 +84,17 @@ export default function BookBox({ book }) {
       <OpenMenuWrapper onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
         {isDescriptionOpen ? "-" : "+"}
       </OpenMenuWrapper>
+
       <ReviewWrapper isDescriptionOpen={isDescriptionOpen}>
         <h1>Resenha Pessoal:</h1>
         <textarea
           autoFocus="none"
           type="text"
-          placeholder={book.review !== "null" ? book.review : ""}
+          placeholder={media.review !== "null" ? media.review : ""}
           value={review}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
-        {review !== "null" && review.length !== 0 ? (
+        {review !== null && review.length !== 0 ? (
           <ion-icon
             onClick={() => updateReview(review)}
             name="checkmark-circle"
@@ -114,21 +117,21 @@ const Wrapper = styled.div`
   max-height: 200px;
   background-color: #fcffdf;
   position: relative;
-  transition-property: height;
+  transition-property: height, opacity;
   transition-duration: 2s;
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   font-family: "Lato", sans-serif;
   padding: 16px 12px 12px 12px;
 `;
 
-const BookPicture = styled.img`
+const MediaPicture = styled.img`
   width: 44px !important;
   height: 68px !important;
   border-radius: 6px;
   object-fit: contain;
 `;
 
-const BookDescription = styled.div`
+const MediaDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,7 +188,6 @@ const OpenMenuWrapper = styled.div`
 
 const ReviewWrapper = styled.div`
   display: ${(props) => (props.isDescriptionOpen ? "initial" : "none")};
-  position: relative;
   opacity: ${(props) => (props.isDescriptionOpen ? "1" : "0")};
   transition-property: opacity;
   transition-duration: 2s;
