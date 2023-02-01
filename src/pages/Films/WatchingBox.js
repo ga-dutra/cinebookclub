@@ -11,7 +11,7 @@ export default function WatchingBox({ media }) {
   const { setInputCleaner, inputCleaner } = useContext(SearchContext);
   const [review, setReview] = useState(media.review);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  console.log(media);
+
   async function ratingChanged(newRating) {
     try {
       await updateWatchingGradeOrReviewOrDate(token, media.api_id, {
@@ -125,9 +125,9 @@ const Wrapper = styled.div`
 `;
 
 const MediaPicture = styled.img`
-  width: 44px !important;
-  height: 68px !important;
-  border-radius: 6px;
+  width: 58px !important;
+  height: 70px !important;
+  border-radius: 10px;
   object-fit: contain;
 `;
 

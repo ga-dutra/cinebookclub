@@ -4,21 +4,37 @@ import { UserContext } from "../../contexts/userContext";
 import FilmConfirmDialog from "./FilmConfirmDialog";
 
 export default function SearchedFilm({ film }) {
-  const { mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
   useEffect(() => {
-    if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
-      setConfirmDialog({
-        isOpen: false,
-        message: `Quer adicionar `,
-        type: "addFilmWatching",
-      });
-    } else if (mainMenuSelected === "LISTA DE DESEJOS") {
-      setConfirmDialog({
-        isOpen: false,
-        message: `Quer adicionar `,
-        type: "addFilmWishList",
-      });
+    if (bottomMenuSelected === "Filmes") {
+      if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+        setConfirmDialog({
+          isOpen: false,
+          message: `Quer adicionar `,
+          type: "addFilmWatching",
+        });
+      } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+        setConfirmDialog({
+          isOpen: false,
+          message: `Quer adicionar `,
+          type: "addFilmWishList",
+        });
+      }
+    } else if (bottomMenuSelected === "Séries") {
+      if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+        setConfirmDialog({
+          isOpen: false,
+          message: `Quer adicionar `,
+          type: "addTvShowWatching",
+        });
+      } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+        setConfirmDialog({
+          isOpen: false,
+          message: `Quer adicionar `,
+          type: "addTvShowWishList",
+        });
+      }
     }
   }, []);
 

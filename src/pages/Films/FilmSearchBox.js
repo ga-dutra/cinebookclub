@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import { FiSearch } from "react-icons/fi";
 import { useContext, useEffect, useState } from "react";
-import { getApiFilms } from "../../services/external_api";
+import { getApiFilms, getApiTvShows } from "../../services/external_api";
 import { SearchContext } from "../../contexts/searchContext";
 import SearchedFilm from "./SearchedFilm";
+import { UserContext } from "../../contexts/userContext";
 
 const unavailableImg =
   "https://www.fullperformance.com.br/images/evento/2020-03-01_1a_logo_default3.jpg";
@@ -14,27 +15,34 @@ export default function FilmSearchBox() {
   const [films, setFilms] = useState([]);
   const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
+  const { bottomMenuSelected } = useContext(UserContext);
 
   useEffect(() => {
     async function updateFilmsList() {
       if (search.length > 3) {
-        const requisition = await getApiFilms(search);
+        const requisition =
+          bottomMenuSelected === "Filmes"
+            ? await getApiFilms(search)
+            : await getApiTvShows(search);
         const slicedRequisition = requisition.data.results.slice(0, 5);
-        console.log(slicedRequisition);
+
         setFilms(requisition.data.results.slice(0, 5));
         const newList = [];
         if (films) {
           films.forEach((film) => {
             const filmUnity = {
-              title: film.title,
+              title: film.title || film.original_name,
               img: film.poster_path
                 ? `${imgURLbase}${film.poster_path}`
                 : unavailableImg,
               overview: film.overview,
               api_id: String(film.id),
-              release_date: String(film.release_date),
+              release_date:
+                bottomMenuSelected === "Filmes"
+                  ? String(film.release_date)
+                  : String(film.first_air_date),
               vote_average: film.vote_average,
-              medias_id: 2,
+              medias_id: bottomMenuSelected === "Filmes" ? 2 : 3,
             };
             newList.push(filmUnity);
           });
@@ -49,7 +57,7 @@ export default function FilmSearchBox() {
   useEffect(() => {
     setSearch("");
   }, [inputCleaner]);
-  console.log(filmsList);
+
   return (
     <Wrapper>
       <BoxSearch>

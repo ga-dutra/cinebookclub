@@ -47,6 +47,7 @@ async function postNewReading(token, newReading) {
 }
 
 async function postNewWatching(token, newWatching) {
+  console.log(newWatching);
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };

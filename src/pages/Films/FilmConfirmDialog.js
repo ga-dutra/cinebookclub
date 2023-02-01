@@ -19,7 +19,10 @@ export default function FilmConfirmDialog({
   const token = useToken();
   const { inputCleaner, setInputCleaner } = useContext(SearchContext);
   function handleConfirmationDialog() {
-    if (confirmDialog.type === "addFilmWatching") {
+    if (
+      confirmDialog.type === "addFilmWatching" ||
+      confirmDialog.type === "addTvShowWatching"
+    ) {
       addNewWatching();
     } else if (confirmDialog.type === "addFilmWishList") {
       addFilmWishList();
