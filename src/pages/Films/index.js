@@ -1,23 +1,23 @@
 import { useContext } from "react";
-import WishList from "./WishList";
-import Readings from "./Readings";
+import FilmSearchBox from "./FilmSearchBox";
 import { UserContext } from "../../contexts/userContext";
-import SearchBox from "./BookSearchBox";
+import Watchings from "./Watchings.js";
+import WishList from "./WishList";
 
-export default function Books() {
+export default function Films() {
   const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
-  if (bottomMenuSelected !== "Livros") return <></>;
+  if (bottomMenuSelected !== "Filmes") return <></>;
   if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
     return (
       <>
-        <SearchBox></SearchBox>
-        <Readings></Readings>
+        <FilmSearchBox></FilmSearchBox>
+        <Watchings></Watchings>
       </>
     );
   } else if (mainMenuSelected === "LISTA DE DESEJOS") {
     return (
       <>
-        <SearchBox></SearchBox>
+        <FilmSearchBox></FilmSearchBox>
         <WishList></WishList>
       </>
     );

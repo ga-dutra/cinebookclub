@@ -2,10 +2,10 @@ import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 import { useContext, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
-import useToken from "../hooks/useToken";
-import { updateGradeOrReviewOrDate } from "../services/services";
+import useToken from "../../hooks/useToken";
+import { updateGradeOrReviewOrDate } from "../../services/services";
 import { toast } from "react-toastify";
-import { SearchContext } from "../contexts/searchContext";
+import { SearchContext } from "../../contexts/searchContext";
 
 export default function BookBox({ book }) {
   const token = useToken();
@@ -45,7 +45,6 @@ export default function BookBox({ book }) {
     }
   }
 
-  const isNull = (val) => val === null;
   return (
     <Wrapper isDescriptionOpen={isDescriptionOpen}>
       <BookPicture src={book.img} alt={`${book.title} poster`} />
@@ -90,6 +89,7 @@ export default function BookBox({ book }) {
             autoFocus="none"
             type="text"
             placeholder={book.review !== "null" ? book.review : ""}
+            value={review}
             onChange={(e) => setReview(e.target.value)}
           ></textarea>
           {review !== "null" && review.length !== 0 ? (

@@ -12,24 +12,21 @@ async function postSignIn(body) {
   return response.data;
 }
 
-async function getApiBooks(search) {
-  const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
-  let response;
-  try {
-    response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&orderBy=relevance&maxResults=5&key=${api_key}`
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-}
-
 async function getUserReadings(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.get(`${baseUrlTest}/readings`, config);
+
+  return response.data;
+}
+
+async function getUserWatchings(token, medias_id) {
+  const body = { medias_id };
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrlTest}/watchings`, config, body);
 
   return response.data;
 }
@@ -42,6 +39,18 @@ async function postNewReading(token, newReading) {
   const response = await axios.post(
     `${baseUrlTest}/readings`,
     newReading,
+    config
+  );
+  return response.data;
+}
+
+async function postNewWatching(token, newWatching) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${baseUrlTest}/watchings`,
+    newWatching,
     config
   );
   return response.data;
@@ -77,13 +86,27 @@ async function postNewBookWishList(token, newBookWishList) {
   return response.data;
 }
 
+async function postNewFilmWishList(token, newFilmWishList) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${baseUrlTest}/films`,
+    newFilmWishList,
+    config
+  );
+  return response.data;
+}
+
 export {
   postSignUp,
   postSignIn,
-  getApiBooks,
   getUserReadings,
   postNewReading,
   updateGradeOrReviewOrDate,
   getUserBooksWishlist,
   postNewBookWishList,
+  postNewFilmWishList,
+  getUserWatchings,
+  postNewWatching,
 };

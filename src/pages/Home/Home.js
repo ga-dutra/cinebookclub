@@ -5,20 +5,19 @@ import Header from "../../components/Header";
 import MainMenu from "../../components/MainMenu";
 import { UserContext } from "../../contexts/userContext";
 import Books from "../Books/index.js";
-import SearchBox from "../../components/SearchBox";
+import Films from "../Films/index.js";
+import TvShows from "../TvShows/index.js";
 
 export default function Home() {
   const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+
   return (
     <Wrapper>
       <Header />
       <MainMenu />
-      {bottomMenuSelected === "Livros" && mainMenuSelected !== "" ? (
-        <SearchBox></SearchBox>
-      ) : (
-        ""
-      )}
-      {bottomMenuSelected === "Livros" ? <Books></Books> : ""}
+      <Books />
+      <Films />
+      <TvShows />
       <BottomNavigationMenu />
     </Wrapper>
   );

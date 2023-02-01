@@ -1,17 +1,9 @@
 import styled from "styled-components";
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../contexts/userContext";
-import ConfirmDialog from "./ConfirmDialog";
+import { UserContext } from "../../contexts/userContext";
+import FilmConfirmDialog from "./FilmConfirmDialog";
 
-export default function SearchedBook({
-  title,
-  author,
-  description,
-  img,
-  book_api_id,
-  page_count,
-}) {
-  const book = { title, author, description, img, book_api_id, page_count };
+export default function SearchedFilm({ film }) {
   const { mainMenuSelected } = useContext(UserContext);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
   useEffect(() => {
@@ -19,13 +11,13 @@ export default function SearchedBook({
       setConfirmDialog({
         isOpen: false,
         message: `Quer adicionar `,
-        type: "addReading",
+        type: "addFilmWatching",
       });
     } else if (mainMenuSelected === "LISTA DE DESEJOS") {
       setConfirmDialog({
         isOpen: false,
         message: `Quer adicionar `,
-        type: "addBookWishList",
+        type: "addFilmWishList",
       });
     }
   }, []);
@@ -36,7 +28,7 @@ export default function SearchedBook({
         onClick={() => {
           setConfirmDialog({ ...confirmDialog, isOpen: true });
         }}
-        src={img}
+        src={film.img}
         alt=""
       />
       <h1
@@ -45,14 +37,15 @@ export default function SearchedBook({
         }}
       >
         {" "}
-        {title} - {author}{" "}
+        <Title>{film.title}</Title> -{" "}
+        <Vote_Average>{film.vote_average}</Vote_Average>{" "}
       </h1>
-      <ConfirmDialog
+      <FilmConfirmDialog
         confirmDialog={confirmDialog}
         setConfirmDialog={setConfirmDialog}
-        img={img}
-        title={title}
-        book={book}
+        img={film.img}
+        title={film.title}
+        film={film}
       />
     </Wrapper>
   );
@@ -81,4 +74,13 @@ const Wrapper = styled.div`
     cursor: pointer;
     font-family: "Lato";
   }
+`;
+
+const Title = styled.span`
+  font-weight: 700;
+`;
+
+const Vote_Average = styled.span`
+  font-style: italic;
+  font-size: 18px;
 `;

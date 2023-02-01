@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import BookBox from "../../components/ReadingBox";
+import BookBox from "./ReadingBox";
 import useToken from "../../hooks/useToken";
 import { getUserReadings } from "../../services/services";
-import LoadingAnimation from "../../common/LoadingAnimation";
 import { SearchContext } from "../../contexts/searchContext";
 
 export default function Readings() {

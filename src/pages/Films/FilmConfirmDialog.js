@@ -6,39 +6,39 @@ import {
 } from "@material-ui/core";
 import { useContext } from "react";
 import styled from "styled-components";
-import { SearchContext } from "../contexts/searchContext";
-import useToken from "../hooks/useToken";
-import { postNewReading, postNewBookWishList } from "../services/services";
+import { SearchContext } from "../../contexts/searchContext";
+import useToken from "../../hooks/useToken";
+import { postNewWatching, postNewFilmWishList } from "../../services/services";
 import { toast } from "react-toastify";
 
-export default function ConfirmDialog({
+export default function FilmConfirmDialog({
   confirmDialog,
   setConfirmDialog,
-  book,
+  film,
 }) {
   const token = useToken();
   const { inputCleaner, setInputCleaner } = useContext(SearchContext);
   function handleConfirmationDialog() {
-    if (confirmDialog.type === "addReading") {
-      addNewReading();
-    } else if (confirmDialog.type === "addBookWishList") {
-      addBookWishList();
+    if (confirmDialog.type === "addFilmWatching") {
+      addNewWatching();
+    } else if (confirmDialog.type === "addFilmWishList") {
+      addFilmWishList();
     }
   }
 
-  async function addNewReading() {
+  async function addNewWatching() {
     try {
-      await postNewReading(token, book);
+      await postNewWatching(token, film);
       setConfirmDialog({
         ...confirmDialog,
         isOpen: false,
       });
-      toast(`${book.title} adicionado com sucesso!`);
+      toast(`${film.title} adicionado com sucesso!`);
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
       if (error.response.status === 409) {
-        toast(`${book.title} já está na sua lista!`);
+        toast(`${film.title} já está na sua lista!`);
         setConfirmDialog({
           ...confirmDialog,
           isOpen: false,
@@ -48,19 +48,19 @@ export default function ConfirmDialog({
     }
   }
 
-  async function addBookWishList() {
+  async function addFilmWishList() {
     try {
-      await postNewBookWishList(token, book);
+      await postNewFilmWishList(token, film);
       setConfirmDialog({
         ...confirmDialog,
         isOpen: false,
       });
-      toast(`${book.title} adicionado com sucesso!`);
+      toast(`${film.title} adicionado com sucesso!`);
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
       if (error.response.status === 409) {
-        toast(`${book.title} já está na sua lista!`);
+        toast(`${film.title} já está na sua lista!`);
         setConfirmDialog({
           ...confirmDialog,
           isOpen: false,
@@ -74,11 +74,11 @@ export default function ConfirmDialog({
     <Dialog open={confirmDialog.isOpen}>
       <Wrapper>
         <DialogTitle>
-          <BookImage src={book.img}></BookImage>
+          <FilmImage src={film.img}></FilmImage>
         </DialogTitle>
         <DialogContent>
           <h5>Adicionar</h5>
-          <h6>{book.title} ?</h6>
+          <h6>{film.title} ?</h6>
         </DialogContent>
         <DialogActions>
           <Button color={"green"} onClick={handleConfirmationDialog}>
@@ -134,7 +134,7 @@ const Button = styled.button`
   border-radius: 4px;
 `;
 
-const BookImage = styled.img`
+const FilmImage = styled.img`
   width: 90px;
   height: 130px;
   margin-bottom: -12px;

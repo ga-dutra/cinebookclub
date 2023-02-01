@@ -2,53 +2,54 @@ import styled from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import { FiSearch } from "react-icons/fi";
 import { useContext, useEffect, useState } from "react";
-import { getApiBooks } from "../services/services";
-import SearchedBook from "./SearchedBook";
-import { SearchContext } from "../contexts/searchContext";
+import { getApiFilms } from "../../services/external_api";
+import { SearchContext } from "../../contexts/searchContext";
+import SearchedFilm from "./SearchedFilm";
 
 const unavailableImg =
   "https://www.fullperformance.com.br/images/evento/2020-03-01_1a_logo_default3.jpg";
-export default function SearchBox() {
+const imgURLbase = "https://image.tmdb.org/t/p/w220_and_h330_face";
+export default function FilmSearchBox() {
   const [search, setSearch] = useState("");
-  const [books, setBooks] = useState([]);
-  const [booksList, setBooksList] = useState([]);
-  const [render, setRender] = useState(0);
+  const [films, setFilms] = useState([]);
+  const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
 
   useEffect(() => {
-    async function updateBooksList() {
+    async function updateFilmsList() {
       if (search.length > 3) {
-        const requisition = await getApiBooks(search);
-        setBooks(requisition.data.items);
+        const requisition = await getApiFilms(search);
+        const slicedRequisition = requisition.data.results.slice(0, 5);
+        console.log(slicedRequisition);
+        setFilms(requisition.data.results.slice(0, 5));
         const newList = [];
-        if (books) {
-          books.forEach((book) => {
-            if (book.volumeInfo.authors && book.volumeInfo.description) {
-              const bookUnity = {
-                title: book.volumeInfo.title,
-                author: book.volumeInfo.authors[0],
-                img: book.volumeInfo.imageLinks
-                  ? book.volumeInfo.imageLinks.thumbnail
-                  : unavailableImg,
-                description: book.volumeInfo.description,
-                book_api_id: book.id,
-                page_count: book.volumeInfo.pageCount || "",
-              };
-              newList.push(bookUnity);
-            }
+        if (films) {
+          films.forEach((film) => {
+            const filmUnity = {
+              title: film.title,
+              img: film.poster_path
+                ? `${imgURLbase}${film.poster_path}`
+                : unavailableImg,
+              overview: film.overview,
+              api_id: String(film.id),
+              release_date: String(film.release_date),
+              vote_average: film.vote_average,
+              medias_id: 2,
+            };
+            newList.push(filmUnity);
           });
-        }
-        setBooksList(newList);
-        setRender(render + 1);
-      } else setBooksList([]);
+
+          setFilmsList(newList);
+        } else setFilmsList([]);
+      }
     }
-    updateBooksList();
+    updateFilmsList();
   }, [search]);
 
   useEffect(() => {
     setSearch("");
   }, [inputCleaner]);
-
+  console.log(filmsList);
   return (
     <Wrapper>
       <BoxSearch>
@@ -66,18 +67,9 @@ export default function SearchBox() {
         <FiSearch />
       </StyledSearch>
       <ResultList>
-        {booksList.length !== 0
-          ? booksList.map((book, index) => (
-              <SearchedBook
-                key={index}
-                title={book.title}
-                author={book.author}
-                img={book.img}
-                description={book.description}
-                book_api_id={book.book_api_id}
-                page_count={book.page_count}
-                id={book.id}
-              />
+        {filmsList.length !== 0
+          ? filmsList.map((film, index) => (
+              <SearchedFilm key={index} film={film} />
             ))
           : ""}
       </ResultList>
