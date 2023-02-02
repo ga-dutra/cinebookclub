@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { useState } from "react";
+import DeletingDialog from "../../components/DeletingDialog";
 
 export default function FilmWishListBox({ film }) {
+  const [confirmDialog, setConfirmDialog] = useState({
+    type: "deleteFilmWishList",
+    isOpen: false,
+  });
   return (
     <Wrapper>
       <FilmDescription>
@@ -18,6 +24,17 @@ export default function FilmWishListBox({ film }) {
             : `${film.overview.slice(0, 60)}...`}{" "}
         </h3>
       </FilmDescription>{" "}
+      <ion-icon
+        onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: true })}
+        name="trash-outline"
+      ></ion-icon>
+      <DeletingDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={film.img}
+        title={film.title}
+        media={film}
+      />
     </Wrapper>
   );
 }
@@ -35,6 +52,13 @@ const Wrapper = styled.div`
   position: relative;
   font-family: "Lato", sans-serif;
   padding: 10px;
+  ion-icon {
+    z-index: 3;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    font-size: 18px;
+  }
 `;
 
 const FilmPicture = styled.img`

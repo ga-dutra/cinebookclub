@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import DeletingDialog from "../../components/DeletingDialog";
+import { useState } from "react";
 
 export default function TvShowWishListBox({ tvshow }) {
+  const [confirmDialog, setConfirmDialog] = useState({
+    type: "deleteTvShowWishList",
+    isOpen: false,
+  });
   return (
     <Wrapper>
       <TvShowDescription>
@@ -17,6 +23,17 @@ export default function TvShowWishListBox({ tvshow }) {
             : `${tvshow.overview.slice(0, 58)}...`}
         </h3>
       </TvShowDescription>{" "}
+      <ion-icon
+        onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: true })}
+        name="trash-outline"
+      ></ion-icon>
+      <DeletingDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={tvshow.img}
+        title={tvshow.title}
+        media={tvshow}
+      />
     </Wrapper>
   );
 }
@@ -34,6 +51,13 @@ const Wrapper = styled.div`
   position: relative;
   font-family: "Lato", sans-serif;
   padding: 10px;
+  ion-icon {
+    z-index: 3;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    font-size: 18px;
+  }
 `;
 
 const TvShowPicture = styled.img`
