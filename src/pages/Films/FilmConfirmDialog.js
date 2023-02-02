@@ -8,7 +8,11 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts/searchContext";
 import useToken from "../../hooks/useToken";
-import { postNewWatching, postNewFilmWishList } from "../../services/services";
+import {
+  postNewWatching,
+  postNewFilmWishList,
+  postNewTvShowWishList,
+} from "../../services/services";
 import { toast } from "react-toastify";
 
 export default function FilmConfirmDialog({
@@ -24,7 +28,10 @@ export default function FilmConfirmDialog({
       confirmDialog.type === "addTvShowWatching"
     ) {
       addNewWatching();
-    } else if (confirmDialog.type === "addFilmWishList") {
+    } else if (
+      confirmDialog.type === "addFilmWishList" ||
+      confirmDialog.type === "addTvShowWishList"
+    ) {
       addFilmWishList();
     }
   }
@@ -53,7 +60,10 @@ export default function FilmConfirmDialog({
 
   async function addFilmWishList() {
     try {
-      await postNewFilmWishList(token, film);
+      delete film.release_date;
+      confirmDialog.type === "addFilmWishList"
+        ? await postNewFilmWishList(token, film)
+        : await postNewTvShowWishList(token, film);
       setConfirmDialog({
         ...confirmDialog,
         isOpen: false,

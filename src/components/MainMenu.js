@@ -4,20 +4,25 @@ import { UserContext } from "../contexts/userContext";
 
 export default function MainMenu() {
   const { mainMenuSelected, setMainMenuSelected } = useContext(UserContext);
-  return (
-    <MenuWrapper>
-      <MenuOption
-        name={"LIDOS/ASSISTIDOS"}
-        setMainMenuSelected={setMainMenuSelected}
-        mainMenuSelected={mainMenuSelected}
-      ></MenuOption>
-      <MenuOption
-        setMainMenuSelected={setMainMenuSelected}
-        mainMenuSelected={mainMenuSelected}
-        name={"LISTA DE DESEJOS"}
-      ></MenuOption>
-    </MenuWrapper>
-  );
+  const { bottomMenuSelected } = useContext(UserContext);
+
+  if (bottomMenuSelected === "Início") {
+    return <MenuWrapper></MenuWrapper>;
+  } else
+    return (
+      <MenuWrapper>
+        <MenuOption
+          name={"LIDOS/ASSISTIDOS"}
+          setMainMenuSelected={setMainMenuSelected}
+          mainMenuSelected={mainMenuSelected}
+        ></MenuOption>
+        <MenuOption
+          setMainMenuSelected={setMainMenuSelected}
+          mainMenuSelected={mainMenuSelected}
+          name={"LISTA DE DESEJOS"}
+        ></MenuOption>
+      </MenuWrapper>
+    );
 }
 
 function MenuOption({ name, mainMenuSelected, setMainMenuSelected }) {
@@ -44,6 +49,7 @@ function MenuOption({ name, mainMenuSelected, setMainMenuSelected }) {
 }
 
 const MenuWrapper = styled.div`
+  position: fixed;
   display: flex;
   width: 100vw;
   margin-top: 80px;
@@ -52,6 +58,7 @@ const MenuWrapper = styled.div`
   background-color: #e8e8e4;
   height: 100px;
   align-items: center;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.12);
 `;
 
 const OptionWrapper = styled.div`

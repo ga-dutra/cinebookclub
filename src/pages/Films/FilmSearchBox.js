@@ -16,6 +16,7 @@ export default function FilmSearchBox() {
   const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
   const { bottomMenuSelected } = useContext(UserContext);
+  const [render, setRender] = useState(0);
 
   useEffect(() => {
     async function updateFilmsList() {
@@ -24,7 +25,6 @@ export default function FilmSearchBox() {
           bottomMenuSelected === "Filmes"
             ? await getApiFilms(search)
             : await getApiTvShows(search);
-        const slicedRequisition = requisition.data.results.slice(0, 5);
 
         setFilms(requisition.data.results.slice(0, 5));
         const newList = [];
@@ -46,10 +46,10 @@ export default function FilmSearchBox() {
             };
             newList.push(filmUnity);
           });
-
           setFilmsList(newList);
-        } else setFilmsList([]);
-      }
+          setRender(render + 1);
+        }
+      } else setFilmsList([]);
     }
     updateFilmsList();
   }, [search]);

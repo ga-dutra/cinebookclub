@@ -15,9 +15,11 @@ export default function Home() {
     <Wrapper>
       <Header />
       <MainMenu />
-      <Books />
-      <Films />
-      <TvShows />
+      <ContentWrapper>
+        <Books />
+        <Films />
+        <TvShows />
+      </ContentWrapper>
       <BottomNavigationMenu />
     </Wrapper>
   );
@@ -26,6 +28,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
   background-color: #f8edeb;
+  margin-bottom: 100px;
+`;
+
+const ContentWrapper = styled.div`
+  margin-top: 190px;
+  max-height: max-content;
 `;

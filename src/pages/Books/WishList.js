@@ -1,10 +1,8 @@
-import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import WishListBox from "../../components/WishListBox";
 import useToken from "../../hooks/useToken";
 import { SearchContext } from "../../contexts/searchContext";
 import { getUserBooksWishlist } from "../../services/services";
-import LoadingAnimation from "../../common/LoadingAnimation";
 
 export default function WishList() {
   const token = useToken();
@@ -17,7 +15,7 @@ export default function WishList() {
     }
     getReadings();
   }, [inputCleaner]);
-  console.log(userBooksWishList);
+
   return userBooksWishList.length !== 0 ? (
     <>
       {userBooksWishList.map((book) => (

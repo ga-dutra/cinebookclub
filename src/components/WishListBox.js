@@ -11,7 +11,7 @@ export default function WishListBox({ book }) {
       <BookDescription>
         <h3>
           <span>Sinopse:</span> <br />
-          {book.description.slice(0, 50)} ...
+          {book.description.slice(0, 70)} ...
         </h3>
       </BookDescription>{" "}
     </Wrapper>
@@ -21,24 +21,23 @@ export default function WishListBox({ book }) {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: calc(100vw - 30px);
   margin: 0 15px 26px 15px;
   border-radius: 8px;
-  height: ${(props) => (props.isDescriptionOpen ? "200px" : "100px")};
+  height: 120px;
   max-height: 200px;
   background-color: #fcffdf;
   position: relative;
-  transition-property: height;
-  transition-duration: 2s;
-  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   font-family: "Lato", sans-serif;
-  padding: 16px 12px 12px 12px;
+  padding: 10px;
 `;
 
 const BookPicture = styled.img`
-  width: 44px !important;
-  height: 68px !important;
+  width: 60px !important;
+  height: 84px !important;
   border-radius: 6px;
+  margin-left: 10px;
   object-fit: contain;
 `;
 
@@ -52,8 +51,8 @@ const BookDescription = styled.div`
   max-height: 60px;
   h1 {
     font-weight: 700;
-    font-size: 17px;
-    margin-bottom: 8px;
+    font-size: 17.5px;
+    margin-bottom: 12px;
   }
   h2,
   span {

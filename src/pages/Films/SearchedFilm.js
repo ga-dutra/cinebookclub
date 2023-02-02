@@ -54,7 +54,7 @@ export default function SearchedFilm({ film }) {
       >
         {" "}
         <Title>{film.title}</Title> -{" "}
-        <Vote_Average>{film.vote_average}</Vote_Average>{" "}
+        <Vote_Average>{Number(film.vote_average).toFixed(1)}</Vote_Average>{" "}
       </h1>
       <FilmConfirmDialog
         confirmDialog={confirmDialog}

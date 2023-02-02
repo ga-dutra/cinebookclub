@@ -57,6 +57,7 @@ a {
   box-sizing: border-box;
 }
 body {
+	background-color: #f8edeb;
 }
 `;
 

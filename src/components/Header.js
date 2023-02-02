@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import logoname from "../assets/img/logoname3.png";
-import logoname2 from "../assets/img/logoname.svg";
 
 export default function Header() {
   return (
@@ -17,14 +16,14 @@ const Wrapper = styled.div`
   left: 0;
   height: 80px;
   width: 100vw;
-  z-index: 0;
+  z-index: 3;
   justify-content: center;
-
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.22);
   background-color: #fec89a;
 `;
 
 const LogoName = styled.img`
-  width: 200px;
-  height: 30px;
-  margin-top: 24px;
+  width: 220px;
+  height: 34px;
+  margin-top: 23px;
 `;

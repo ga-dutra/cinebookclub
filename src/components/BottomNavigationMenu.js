@@ -65,11 +65,12 @@ const MenuWrapper = styled.div`
   display: flex;
   height: 100px;
   width: 100vw;
-
+  z-index: 5;
   align-items: center;
   justify-content: space-around;
   border: 1px solid #dbdbdb;
   box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  background-color: #f8edeb;
 `;
 
 const IconWrapper = styled.div`

@@ -34,7 +34,6 @@ async function getUserWatchings(token, medias_id) {
 }
 
 async function postNewReading(token, newReading) {
-  console.log(token);
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -47,7 +46,6 @@ async function postNewReading(token, newReading) {
 }
 
 async function postNewWatching(token, newWatching) {
-  console.log(newWatching);
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -82,7 +80,22 @@ async function getUserBooksWishlist(token) {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.get(`${baseUrlTest}/books`, config);
+  return response.data;
+}
 
+async function getUserFilmsWishlist(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrlTest}/films`, config);
+  return response.data;
+}
+
+async function getUserTvShowsWishlist(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrlTest}/tvshows`, config);
   return response.data;
 }
 
@@ -110,6 +123,18 @@ async function postNewFilmWishList(token, newFilmWishList) {
   return response.data;
 }
 
+async function postNewTvShowWishList(token, newTvShowWishList) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${baseUrlTest}/tvshows`,
+    newTvShowWishList,
+    config
+  );
+  return response.data;
+}
+
 export {
   postSignUp,
   postSignIn,
@@ -118,8 +143,11 @@ export {
   updateBookGradeOrReviewOrDate,
   updateWatchingGradeOrReviewOrDate,
   getUserBooksWishlist,
+  getUserFilmsWishlist,
+  getUserTvShowsWishlist,
   postNewBookWishList,
   postNewFilmWishList,
+  postNewTvShowWishList,
   getUserWatchings,
   postNewWatching,
 };

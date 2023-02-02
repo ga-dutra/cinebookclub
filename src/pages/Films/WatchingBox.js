@@ -41,6 +41,7 @@ export default function WatchingBox({ media }) {
         medias_id: media.medias_id,
       });
       toast("Resenha atualizada com sucesso");
+      setIsDescriptionOpen(false);
       setInputCleaner(!inputCleaner);
     } catch (error) {
       console.log(error);
@@ -137,7 +138,7 @@ const MediaDescription = styled.div`
   justify-content: center;
   text-align: center;
   padding-left: 8px;
-  max-width: 140px;
+  max-width: 164px;
   max-height: 60px;
   h1 {
     font-weight: 700;

@@ -122,9 +122,9 @@ const Wrapper = styled.div`
 `;
 
 const BookPicture = styled.img`
-  width: 44px !important;
-  height: 68px !important;
-  border-radius: 6px;
+  width: 62px !important;
+  height: 70px !important;
+  border-radius: 8px;
   object-fit: contain;
 `;
 
@@ -134,7 +134,7 @@ const BookDescription = styled.div`
   justify-content: center;
   text-align: center;
   padding-left: 8px;
-  max-width: 140px;
+  max-width: 158px;
   max-height: 60px;
   h1 {
     font-weight: 700;
