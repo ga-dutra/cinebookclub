@@ -16,6 +16,7 @@ export default function BookBox({ book }) {
     type: "deleteReading",
     isOpen: false,
   });
+  const initialReview = book.review;
   async function ratingChanged(newRating) {
     try {
       await updateBookGradeOrReviewOrDate(token, book.book_api_id, {
@@ -91,11 +92,13 @@ export default function BookBox({ book }) {
         <textarea
           autoFocus="none"
           type="text"
-          placeholder={book.review !== "null" ? book.review : ""}
-          value={review}
+          placeholder={review !== "null" && review !== null ? review : ""}
+          value={review !== "null" && review !== null ? review : ""}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
-        {review !== "null" && review.length !== 0 ? (
+        {review !== "null" &&
+        review.length !== 0 &&
+        initialReview !== review ? (
           <ion-icon
             onClick={() => updateReview(review)}
             name="checkmark"

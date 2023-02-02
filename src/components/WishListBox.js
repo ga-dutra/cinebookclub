@@ -1,7 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { SearchContext } from "../contexts/searchContext";
-import useToken from "../hooks/useToken";
 import DeletingDialog from "./DeletingDialog";
 
 export default function WishListBox({ book }) {
@@ -9,8 +7,7 @@ export default function WishListBox({ book }) {
     type: "deleteBookWishList",
     isOpen: false,
   });
-  const token = useToken();
-  const { setInputCleaner, inputCleaner } = useContext(SearchContext);
+
   return (
     <Wrapper>
       <BookDescription>

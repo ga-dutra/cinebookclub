@@ -5,13 +5,18 @@ import useToken from "../../hooks/useToken";
 import { updateWatchingGradeOrReviewOrDate } from "../../services/services";
 import { toast } from "react-toastify";
 import { SearchContext } from "../../contexts/searchContext";
+import DeletingDialog from "../../components/DeletingDialog";
 
 export default function WatchingBox({ media }) {
   const token = useToken();
   const { setInputCleaner, inputCleaner } = useContext(SearchContext);
   const [review, setReview] = useState(media.review);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-
+  const [confirmDialog, setConfirmDialog] = useState({
+    type: "deleteWatching",
+    isOpen: false,
+  });
+  const initialReview = media.review;
   async function ratingChanged(newRating) {
     try {
       await updateWatchingGradeOrReviewOrDate(token, media.api_id, {
@@ -91,19 +96,30 @@ export default function WatchingBox({ media }) {
         <textarea
           autoFocus="none"
           type="text"
-          placeholder={media.review !== "null" ? media.review : ""}
-          value={review}
+          placeholder={review !== "null" && review !== null ? review : ""}
+          value={review !== "null" && review !== null ? review : ""}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
-        {review !== null && review.length !== 0 ? (
+        {review !== "null" && initialReview !== review ? (
           <ion-icon
             onClick={() => updateReview(review)}
-            name="checkmark-circle"
+            name="checkmark"
           ></ion-icon>
         ) : (
           ""
         )}
       </ReviewWrapper>
+      <ion-icon
+        onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: true })}
+        name="trash-outline"
+      ></ion-icon>
+      <DeletingDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={media.img}
+        title={media.title}
+        media={media}
+      />
     </Wrapper>
   );
 }
@@ -123,6 +139,14 @@ const Wrapper = styled.div`
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   font-family: "Lato", sans-serif;
   padding: 16px 12px 12px 12px;
+  position: relative;
+  ion-icon {
+    display: ${(props) => (props.isDescriptionOpen ? "initial" : "none")};
+    position: absolute;
+    bottom: 84px;
+    right: 12px;
+    font-size: 20px;
+  }
 `;
 
 const MediaPicture = styled.img`
@@ -224,8 +248,8 @@ const ReviewWrapper = styled.div`
   ion-icon {
     position: absolute;
     z-index: 3;
-    right: 8px;
-    bottom: 10px;
+    right: 158px;
+    bottom: 60px;
     font-size: 24px;
     color: #ff002b;
   }
