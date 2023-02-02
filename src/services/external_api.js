@@ -41,4 +41,38 @@ async function getApiTvShows(search) {
   return response;
 }
 
-export { getApiBooks, getApiFilms, getApiTvShows };
+async function getApiTrendingFilms(time_window) {
+  const api_key = process.env.REACT_APP_MOVIEDB_API_KEY;
+  let response;
+  try {
+    response = await axios.get(
+      `
+      https://api.themoviedb.org/3/trending/movie/${time_window}?api_key=${api_key}`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+}
+
+async function getApiTrendingTvShows(time_window) {
+  const api_key = process.env.REACT_APP_MOVIEDB_API_KEY;
+  let response;
+  try {
+    response = await axios.get(
+      `
+      https://api.themoviedb.org/3/trending/tv/${time_window}?api_key=${api_key}`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+}
+
+export {
+  getApiBooks,
+  getApiFilms,
+  getApiTvShows,
+  getApiTrendingFilms,
+  getApiTrendingTvShows,
+};

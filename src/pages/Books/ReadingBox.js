@@ -6,12 +6,17 @@ import useToken from "../../hooks/useToken";
 import { updateBookGradeOrReviewOrDate } from "../../services/services";
 import { toast } from "react-toastify";
 import { SearchContext } from "../../contexts/searchContext";
+import DeletingDialog from "../../components/DeletingDialog";
 
 export default function BookBox({ book }) {
   const token = useToken();
   const { setInputCleaner, inputCleaner } = useContext(SearchContext);
   const [review, setReview] = useState(book.review);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({
+    type: "deleteReading",
+    isOpen: false,
+  });
   async function ratingChanged(newRating) {
     try {
       await updateBookGradeOrReviewOrDate(token, book.book_api_id, {
@@ -94,12 +99,23 @@ export default function BookBox({ book }) {
         {review !== "null" && review.length !== 0 ? (
           <ion-icon
             onClick={() => updateReview(review)}
-            name="checkmark-circle"
+            name="checkmark"
           ></ion-icon>
         ) : (
           ""
         )}
       </ReviewWrapper>
+      <ion-icon
+        onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: true })}
+        name="trash-outline"
+      ></ion-icon>
+      <DeletingDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={book.img}
+        title={book.title}
+        media={book}
+      />
     </Wrapper>
   );
 }
@@ -119,6 +135,13 @@ const Wrapper = styled.div`
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   font-family: "Lato", sans-serif;
   padding: 16px 12px 12px 12px;
+  ion-icon {
+    display: ${(props) => (props.isDescriptionOpen ? "initial" : "none")};
+    position: absolute;
+    bottom: 84px;
+    right: 12px;
+    font-size: 20px;
+  }
 `;
 
 const BookPicture = styled.img`
@@ -221,8 +244,8 @@ const ReviewWrapper = styled.div`
   ion-icon {
     position: absolute;
     z-index: 3;
-    right: 8px;
-    bottom: 10px;
+    right: 158px;
+    bottom: 60px;
     font-size: 24px;
     color: #ff002b;
   }

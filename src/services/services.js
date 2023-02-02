@@ -135,6 +135,63 @@ async function postNewTvShowWishList(token, newTvShowWishList) {
   return response.data;
 }
 
+async function deleteReading(token, book_api_id) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+    data: { book_api_id },
+  };
+  const response = await axios.delete(`${baseUrlTest}/readings`, config);
+  return response.data;
+}
+
+async function deleteWatching(token, api_id, medias_id) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.delete(
+    `${baseUrlTest}/watchings`,
+    { medias_id, api_id },
+    config
+  );
+  return response.data;
+}
+
+async function deleteBookWishList(token, book_api_id) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.delete(
+    `${baseUrlTest}/books`,
+    { book_api_id },
+    config
+  );
+  return response.data;
+}
+
+async function deleteFilmWishList(token, api_id) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.delete(
+    `${baseUrlTest}/films`,
+    { api_id },
+    config
+  );
+  return response.data;
+}
+
+async function deleteTvShowWishList(token, api_id) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.delete(
+    `${baseUrlTest}/tvshows`,
+    { api_id },
+    config
+  );
+  return response.data;
+}
+
 export {
   postSignUp,
   postSignIn,
@@ -150,4 +207,9 @@ export {
   postNewTvShowWishList,
   getUserWatchings,
   postNewWatching,
+  deleteReading,
+  deleteWatching,
+  deleteBookWishList,
+  deleteFilmWishList,
+  deleteTvShowWishList,
 };
