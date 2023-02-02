@@ -147,48 +147,36 @@ async function deleteReading(token, book_api_id) {
 async function deleteWatching(token, api_id, medias_id) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
+    data: { api_id, medias_id },
   };
-  const response = await axios.delete(
-    `${baseUrlTest}/watchings`,
-    { medias_id, api_id },
-    config
-  );
+  const response = await axios.delete(`${baseUrlTest}/watchings`, config);
   return response.data;
 }
 
 async function deleteBookWishList(token, book_api_id) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
+    data: { book_api_id },
   };
-  const response = await axios.delete(
-    `${baseUrlTest}/books`,
-    { book_api_id },
-    config
-  );
+  const response = await axios.delete(`${baseUrlTest}/books`, config);
   return response.data;
 }
 
 async function deleteFilmWishList(token, api_id) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
+    data: { api_id },
   };
-  const response = await axios.delete(
-    `${baseUrlTest}/films`,
-    { api_id },
-    config
-  );
+  const response = await axios.delete(`${baseUrlTest}/films`, config);
   return response.data;
 }
 
 async function deleteTvShowWishList(token, api_id) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
+    data: { api_id },
   };
-  const response = await axios.delete(
-    `${baseUrlTest}/tvshows`,
-    { api_id },
-    config
-  );
+  const response = await axios.delete(`${baseUrlTest}/tvshows`, config);
   return response.data;
 }
 

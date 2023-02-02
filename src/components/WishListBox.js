@@ -1,6 +1,16 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { SearchContext } from "../contexts/searchContext";
+import useToken from "../hooks/useToken";
+import DeletingDialog from "./DeletingDialog";
 
 export default function WishListBox({ book }) {
+  const [confirmDialog, setConfirmDialog] = useState({
+    type: "deleteBookWishList",
+    isOpen: false,
+  });
+  const token = useToken();
+  const { setInputCleaner, inputCleaner } = useContext(SearchContext);
   return (
     <Wrapper>
       <BookDescription>
@@ -14,6 +24,17 @@ export default function WishListBox({ book }) {
           {book.description.slice(0, 70)} ...
         </h3>
       </BookDescription>{" "}
+      <ion-icon
+        onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: true })}
+        name="trash-outline"
+      ></ion-icon>
+      <DeletingDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={book.img}
+        title={book.title}
+        media={book}
+      />
     </Wrapper>
   );
 }
@@ -31,6 +52,15 @@ const Wrapper = styled.div`
   position: relative;
   font-family: "Lato", sans-serif;
   padding: 10px;
+  position: relative;
+
+  ion-icon {
+    z-index: 3;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    font-size: 18px;
+  }
 `;
 
 const BookPicture = styled.img`
