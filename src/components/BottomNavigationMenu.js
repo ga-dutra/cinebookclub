@@ -38,7 +38,7 @@ const iconNames = [
     name: "Livros",
   },
   { outlineIcon: "tv-outline", fullIcon: "tv", name: "Séries" },
-  { outlineIcon: "menu-outline", fullIcon: "menu", name: "Mais" },
+  // { outlineIcon: "menu-outline", fullIcon: "menu", name: "Mais" },
 ];
 
 export default function BottomNavigationMenu() {

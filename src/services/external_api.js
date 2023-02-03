@@ -20,7 +20,7 @@ async function getApiFilms(search) {
   let response;
   try {
     response = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=pt-BR&query=${search}&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=pt-BR&query=${search}&page=1&region=BR&include_adult=false`
     );
   } catch (error) {
     console.log(error);
@@ -33,7 +33,7 @@ async function getApiTvShows(search) {
   let response;
   try {
     response = await axios.get(
-      `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=pt-BR&query=${search}&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=pt-BR&query=${search}&page=1&region=BR&include_adult=false`
     );
   } catch (error) {
     console.log(error);
@@ -41,32 +41,48 @@ async function getApiTvShows(search) {
   return response;
 }
 
-async function getApiTrendingFilms(time_window) {
+async function getApiTrendingFilms(type) {
   const api_key = process.env.REACT_APP_MOVIEDB_API_KEY;
   let response;
   try {
-    response = await axios.get(
-      `
-      https://api.themoviedb.org/3/trending/movie/${time_window}?api_key=${api_key}`
-    );
+    if (type === "popular") {
+      response = await axios.get(
+        `
+        https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=pt-BR&region=BR&page=1`
+      );
+    } else if (type === "now_playing") {
+      response = await axios.get(
+        `
+        https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=pt-BR&region=BR&page=1`
+      );
+    }
   } catch (error) {
     console.log(error);
   }
-  return response;
+  return response.data;
 }
 
-async function getApiTrendingTvShows(time_window) {
+async function getApiTrendingTvShows(type) {
   const api_key = process.env.REACT_APP_MOVIEDB_API_KEY;
   let response;
+  console.log("teste");
   try {
-    response = await axios.get(
-      `
-      https://api.themoviedb.org/3/trending/tv/${time_window}?api_key=${api_key}`
-    );
+    if (type === "popular") {
+      console.log("teste");
+      response = await axios.get(
+        `
+        https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=pt-BR&region=BR&page=1`
+      );
+    } else if (type === "now_playing") {
+      response = await axios.get(
+        `
+        https://api.themoviedb.org/3/tv/on_the_air?api_key=${api_key}&language=pt-BR&region=BR&page=1`
+      );
+    }
   } catch (error) {
     console.log(error);
   }
-  return response;
+  return response.data;
 }
 
 export {

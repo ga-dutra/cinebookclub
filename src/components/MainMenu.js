@@ -7,7 +7,20 @@ export default function MainMenu() {
   const { bottomMenuSelected } = useContext(UserContext);
 
   if (bottomMenuSelected === "Início") {
-    return <MenuWrapper></MenuWrapper>;
+    return (
+      <MenuWrapper>
+        <MenuOption
+          name={"POPULARES"}
+          setMainMenuSelected={setMainMenuSelected}
+          mainMenuSelected={mainMenuSelected}
+        ></MenuOption>
+        <MenuOption
+          setMainMenuSelected={setMainMenuSelected}
+          mainMenuSelected={mainMenuSelected}
+          name={"PASSANDO HOJE"}
+        ></MenuOption>
+      </MenuWrapper>
+    );
   } else
     return (
       <MenuWrapper>
@@ -54,7 +67,7 @@ const MenuWrapper = styled.div`
   width: 100vw;
   margin-top: 80px;
   justify-content: space-evenly;
-  z-index: 1;
+  z-index: 4;
   background-color: #e8e8e4;
   height: 100px;
   align-items: center;

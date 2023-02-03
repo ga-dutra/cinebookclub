@@ -7,6 +7,7 @@ import { UserContext } from "../../contexts/userContext";
 import Books from "../Books/index.js";
 import Films from "../Films/index.js";
 import TvShows from "../TvShows/index.js";
+import Trending from "../Trending";
 
 export default function Home() {
   const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
@@ -14,11 +15,13 @@ export default function Home() {
   return (
     <Wrapper>
       <Header />
-      <MainMenu />
+      {bottomMenuSelected ? <MainMenu /> : ""}
+
       <ContentWrapper>
         <Books />
         <Films />
         <TvShows />
+        <Trending />
       </ContentWrapper>
       <BottomNavigationMenu />
     </Wrapper>
