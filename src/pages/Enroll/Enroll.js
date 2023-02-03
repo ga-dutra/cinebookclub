@@ -77,15 +77,17 @@ export const Wrapper = styled.div`
   animation: gradient 7s ease infinite;
   background: linear-gradient(
       -45deg,
+      #f74f31,
       #ffd7ba,
       #fec89a,
       #fec5bb,
-      #e8e8e4,
       #d8e2dc,
       #64dfdf,
-      #ffd7ba
+      #ffd7ba,
+      #fec5bb
     )
     no-repeat;
+
   background-size: 300% 300%;
   display: flex;
   flex-direction: column;
