@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logoname from "../assets/img/logoname3.png";
+import logoname from "../assets/img/logoname.png";
 
 export default function Header() {
   return (
