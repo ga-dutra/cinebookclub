@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model medias {
+  id                Int                 @id(map: "medias_pk") @default(autoincrement())
+  name              String              @unique @db.VarChar(80)
+  books_wishlist    books_wishlist[]
+  films_wishlist    films_wishlist[]
+  readings          readings[]
+  tv_shows_wishlist tv_shows_wishlist[]
+  watchings         watchings[]
+}
+
+model readings {
+  id          Int      @id(map: "readings_pk") @default(autoincrement())
+  medias_id   Int
+  user_id     Int
+  grade       Decimal  @default(0.0) @db.Decimal
+  review      String?  @default("null")
+  book_api_id String   @db.VarChar(70)
+  title       String   @db.VarChar(100)
+  author      String   @db.VarChar(200)
+  description String?
+  img         String   @db.VarChar(255)
+  page_count  Int
+  read_at     DateTime @default(dbgenerated("'2023-01-30 22:00:05.78773'::timestamp without time zone")) @db.Timestamp(6)
+  medias      medias   @relation(fields: [medias_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "readings_fk0")
+  users       users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "readings_fk1")
+}
+
+model sessions {
+  id         Int       @id(map: "sessions_pk") @default(autoincrement())
+  user_id    Int
+  token      String    @db.VarChar(180)
+  created_at DateTime  @default(dbgenerated("'2023-01-25 18:10:36.461854'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  active     Boolean   @default(true)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sessions_fk0")
+}
+
+model users {
+  id                Int                 @id(map: "users_pk") @default(autoincrement())
+  email             String              @unique @db.VarChar(120)
+  password          String              @db.VarChar(120)
+  created_at        DateTime            @default(dbgenerated("'2023-01-25 18:10:36.461854'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at        DateTime?           @db.Timestamp(6)
+  books_wishlist    books_wishlist[]
+  films_wishlist    films_wishlist[]
+  readings          readings[]
+  sessions          sessions[]
+  tv_shows_wishlist tv_shows_wishlist[]
+  watchings         watchings[]
+}
+
+model books_wishlist {
+  id          Int       @id(map: "books_wishlist_pk") @default(autoincrement())
+  user_id     Int
+  medias_id   Int
+  created_at  DateTime  @default(dbgenerated("'2023-01-30 21:56:08.259375'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at  DateTime? @db.Timestamp(6)
+  book_api_id String    @db.VarChar(255)
+  title       String    @db.VarChar(255)
+  author      String    @db.VarChar(255)
+  description String
+  img         String    @db.VarChar(255)
+  page_count  Int
+  users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "books_wishlist_fk0")
+  medias      medias    @relation(fields: [medias_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "books_wishlist_fk1")
+}
+
+model films_wishlist {
+  id           Int      @id(map: "films_wishlist_pk") @default(autoincrement())
+  medias_id    Int
+  user_id      Int
+  api_id       String   @db.VarChar(100)
+  title        String   @db.VarChar(100)
+  tagline      String
+  runtime      Int
+  created_at   DateTime @default(dbgenerated("'2023-01-31 20:03:07.233602'::timestamp without time zone")) @db.Timestamp(6)
+  img          String   @db.VarChar(255)
+  vote_average Float    @db.Real
+  overview     String
+  medias       medias   @relation(fields: [medias_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "films_wishlist_fk0")
+  users        users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "films_wishlist_fk1")
+}
+
+model tv_shows_wishlist {
+  id             Int      @id(map: "tv_shows_wishlist_pk") @default(autoincrement())
+  medias_id      Int
+  user_id        Int
+  api_id         String   @db.VarChar(100)
+  title          String   @db.VarChar(150)
+  creator        String   @db.VarChar(150)
+  seasons_number Int
+  tagline        String
+  img            String   @db.VarChar(120)
+  created_at     DateTime @default(dbgenerated("'2023-01-31 20:03:07.233602'::timestamp without time zone")) @db.Timestamp(6)
+  vote_average   Float    @db.Real
+  overview       String
+  medias         medias   @relation(fields: [medias_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tv_shows_wishlist_fk0")
+  users          users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tv_shows_wishlist_fk1")
+}
+
+model watchings {
+  id           Int      @id(map: "watchings_pk") @default(autoincrement())
+  medias_id    Int
+  user_id      Int
+  api_id       String   @db.VarChar(100)
+  title        String   @db.VarChar(100)
+  overview     String
+  release_date String   @db.VarChar(28)
+  img          String   @db.VarChar(255)
+  created_at   DateTime @default(dbgenerated("'2023-01-31 19:07:36.309886'::timestamp without time zone")) @db.Timestamp(6)
+  vote_average Float    @db.Real
+  watched_at   DateTime @default(dbgenerated("'2023-01-31 19:07:36.309886'::timestamp without time zone")) @db.Timestamp(6)
+  grade        Decimal  @default(0.0) @db.Decimal
+  review       String?
+  medias       medias   @relation(fields: [medias_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "watchings_fk0")
+  users        users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "watchings_fk1")
+}
