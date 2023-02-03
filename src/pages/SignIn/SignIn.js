@@ -1,17 +1,10 @@
-import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import newlogo from "../../assets/img/newlogo.png";
 import { useNavigate } from "react-router-dom";
 import { postSignIn } from "../../services/services";
 
-import {
-  Wrapper,
-  FormWrapper,
-  Logo,
-  Link,
-  Description,
-} from "../Enroll/Enroll.js";
+import { Wrapper, FormWrapper, Logo, Link } from "../Enroll/Enroll.js";
 import { UserContext } from "../../contexts/userContext";
 
 export default function SignIn() {

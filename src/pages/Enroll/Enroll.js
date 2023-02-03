@@ -74,8 +74,19 @@ export default function Enroll() {
 }
 
 export const Wrapper = styled.div`
-  background-color: #fddacf;
-  background-color: #ffd7ba;
+  animation: gradient 7s ease infinite;
+  background: linear-gradient(
+      -45deg,
+      #ffd7ba,
+      #fec89a,
+      #fec5bb,
+      #e8e8e4,
+      #d8e2dc,
+      #64dfdf,
+      #ffd7ba
+    )
+    no-repeat;
+  background-size: 300% 300%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,6 +94,18 @@ export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  @keyframes gradient {
+    0% {
+      background-position: 0 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0 50%;
+    }
+  }
 `;
 
 export const Logo = styled.img`
