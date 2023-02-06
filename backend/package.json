@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
-    "start": "npx prisma migrate deploy && npx prisma db seed && node dist/server.js",
+    "start": "npx prisma migrate deploy && npx prisma db seed && npm run build && node dist/server.js",
     "migration:run": "prisma migrate deploy",
     "migration:generate": "npm run dev:load-envs prisma migrate dev",
     "lint": "eslint .",
