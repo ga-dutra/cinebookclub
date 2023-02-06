@@ -10,17 +10,6 @@ services:
     depends_on:
       - app_node
 
-  nginx:
-    build: ./nginx
-    container_name: nginx
-    ports:
-      - 80:80
-    volumes:
-      - build_react:/var/www/html
-    depends_on:
-      - app_react
-      - app_node
-
   banco:
     image: postgres
     container_name: banco
@@ -31,6 +20,17 @@ services:
     restart: always
     volumes:
       - volume_banco:/var/lib/postgresql/data
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - app_react
+      - app_node
 
   app_node:
     build: ./backend
