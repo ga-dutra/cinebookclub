@@ -14,10 +14,6 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN npx run prisma migrate deploy
-
-RUN npx run prisma db seed
-
 RUN apt-get update && apt-get install -y wget
 
 ENV DOCKERIZE_VERSION v0.6.1
