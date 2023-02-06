@@ -35,7 +35,7 @@ export default function FilmSearchBox() {
               img: film.poster_path
                 ? `${imgURLbase}${film.poster_path}`
                 : unavailableImg,
-              overview: film.overview,
+              overview: film.overview || "...",
               api_id: String(film.id),
               release_date:
                 bottomMenuSelected === "Filmes"
