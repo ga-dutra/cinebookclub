@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrlTest = "http://localhost:4000"; //url de teste
+const baseUrlTest = "http://localhost:4000/api";
 
 async function postSignUp(body) {
   const response = await axios.post(`${baseUrlTest}/users/signup`, body);
