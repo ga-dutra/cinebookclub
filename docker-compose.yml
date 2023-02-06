@@ -43,7 +43,12 @@ services:
       - ./backend:/usr/src
       - /usr/src/node_modules
     entrypoint: dockerize -wait tcp://banco:5432 -timeout 20s docker-entrypoint.sh
-    command: bash -c "npm run start && npm run dev:seed"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        "npm run start"
+        "npm run dev:seed"
     depends_on:
       - db
 
