@@ -1,4 +1,4 @@
-CREATE TABLE "public.users" (
+CREATE TABLE "users" (
 	"id" serial NOT NULL,
 	"email" varchar(120) NOT NULL UNIQUE,
 	"password" varchar(120) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "public.users" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.medias" (
+CREATE TABLE "medias" (
 	"id" serial NOT NULL,
 	"name" varchar(80) NOT NULL UNIQUE,
 	CONSTRAINT "medias_pk" PRIMARY KEY ("id")
@@ -17,7 +17,7 @@ CREATE TABLE "public.medias" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.books_wishlist" (
+CREATE TABLE "books_wishlist" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"medias_id" integer NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE "public.books_wishlist" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.sessions" (
+CREATE TABLE "sessions" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"token" varchar(180) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE "public.sessions" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.readings" (
+CREATE TABLE "readings" (
 	"id" serial NOT NULL,
 	"medias_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE "public.readings" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.watchings" (
+CREATE TABLE "watchings" (
 	"id" serial NOT NULL,
 	"medias_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE "public.watchings" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.films_wishlist" (
+CREATE TABLE "films_wishlist" (
 	"id" serial NOT NULL,
 	"medias_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE "public.films_wishlist" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public.tv_shows_wishlist" (
+CREATE TABLE "tv_shows_wishlist" (
 	"id" serial NOT NULL,
 	"medias_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
