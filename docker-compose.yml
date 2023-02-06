@@ -10,32 +10,6 @@ services:
     depends_on:
       - app_node
 
-  db:
-    image: postgres
-    container_name: db
-    env_file:
-      - ./backend/.env
-    ports:
-      - 2345:${POSTGRES_PORT}
-    restart: always
-    volumes:
-      - volume_db:/var/lib/postgresql/data
-
-  app_node:
-    build: ./backend
-    container_name: app_node
-    ports:
-      - 4000:4000
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend:/usr/src
-      - /usr/src/node_modules
-    entrypoint: dockerize -wait tcp://banco:${POSTGRES_PORT} -timeout 20s docker-entrypoint.sh
-    command: bash -c "npm run start && npm run dev:seed"
-    depends_on:
-      - db
-
   nginx:
     build: ./nginx
     container_name: nginx
@@ -46,6 +20,32 @@ services:
     depends_on:
       - app_react
       - app_node
+
+  db:
+    image: postgres
+    container_name: db
+    env_file:
+      - ./backend/.env.prod
+    ports:
+      - 2345:5432
+    restart: always
+    volumes:
+      - volume_db:/var/lib/postgresql/data
+
+  app_node:
+    build: ./backend
+    container_name: app_node
+    ports:
+      - 4000:4000
+    env_file:
+      - ./backend/.env.prod
+    volumes:
+      - ./backend:/usr/src
+      - /usr/src/node_modules
+    entrypoint: dockerize -wait tcp://banco:5432 -timeout 20s docker-entrypoint.sh
+    command: bash -c "npm run start && npm run dev:seed"
+    depends_on:
+      - db
 
 volumes:
   build_react:

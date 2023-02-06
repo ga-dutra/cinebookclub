@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrlTest = "http://localhost:4000/api";
+const baseUrlTest = "http://https://52.7.87.150//api";
 
 async function postSignUp(body) {
   const response = await axios.post(`${baseUrlTest}/users/signup`, body);
