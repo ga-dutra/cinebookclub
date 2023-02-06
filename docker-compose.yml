@@ -21,16 +21,16 @@ services:
       - app_react
       - app_node
 
-  db:
+  banco:
     image: postgres
-    container_name: db
+    container_name: banco
     env_file:
       - ./backend/.env.prod
     ports:
       - 2345:5432
     restart: always
     volumes:
-      - volume_db:/var/lib/postgresql/data
+      - volume_banco:/var/lib/postgresql/data
 
   app_node:
     build: ./backend
@@ -45,8 +45,8 @@ services:
     entrypoint: dockerize -wait tcp://banco:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run start"
     depends_on:
-      - db
+      - banco
 
 volumes:
   build_react:
-  volume_db:
+  volume_banco:
