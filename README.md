@@ -8,6 +8,9 @@ Organize your cultural life with Cine-Book Club!
  <h2>About</h2>
 Cine-Book Club is an application that allows you to list and organize their read books and movies and series watched, being able to add notes and reviews. In addition, it is also possible to build a wish list, with works that you want to consume in the future.
   <br>
+   <h2>Deploy</h2>
+You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.amazonaws.com/
+  <br>
  <h2>Tecnologies</h2>
  The following tools and frameworks were used in the construction of the project:
  <br>
