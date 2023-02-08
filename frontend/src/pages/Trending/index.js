@@ -27,7 +27,6 @@ export default function Trending() {
         if (mediaSelected === "films" && mainMenu1Selected === "POPULARES") {
           newMedias = (await getApiTrendingFilms("popular")).results;
           newMedias = sortMediaByGrade(newMedias);
-          console.log(newMedias);
           setMedias(newMedias);
         } else if (
           mediaSelected === "films" &&
