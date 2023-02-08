@@ -12,16 +12,16 @@ export default function SearchedBook({
   page_count,
 }) {
   const book = { title, author, description, img, book_api_id, page_count };
-  const { mainMenuSelected } = useContext(UserContext);
+  const { mainMenu2Selected } = useContext(UserContext);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
   useEffect(() => {
-    if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+    if (mainMenu2Selected === "LIDOS/ASSISTIDOS") {
       setConfirmDialog({
         isOpen: false,
         message: `Quer adicionar `,
         type: "addReading",
       });
-    } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+    } else if (mainMenu2Selected === "LISTA DE DESEJOS") {
       setConfirmDialog({
         isOpen: false,
         message: `Quer adicionar `,

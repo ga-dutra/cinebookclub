@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/userContext";
@@ -7,13 +7,16 @@ function MenuIcon({ outlineIcon, fullIcon, name }) {
   const [isClicked, setIsClicked] = useState(false);
   const { bottomMenuSelected, setBottomMenuSelected } = useContext(UserContext);
 
+  useEffect(() => {
+    if (bottomMenuSelected === name) {
+      setIsClicked(true);
+    }
+  }, [isClicked]);
+
   function clickMenu() {
     if (bottomMenuSelected !== name) {
       setIsClicked(true);
       setBottomMenuSelected(name);
-    } else {
-      setIsClicked(false);
-      setBottomMenuSelected("");
     }
   }
 

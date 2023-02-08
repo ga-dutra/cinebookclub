@@ -4,17 +4,17 @@ import { UserContext } from "../../contexts/userContext";
 import FilmConfirmDialog from "./FilmConfirmDialog";
 
 export default function SearchedFilm({ film }) {
-  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected, mainMenu2Selected } = useContext(UserContext);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
   useEffect(() => {
     if (bottomMenuSelected === "Filmes") {
-      if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+      if (mainMenu2Selected === "LIDOS/ASSISTIDOS") {
         setConfirmDialog({
           isOpen: false,
           message: `Quer adicionar `,
           type: "addFilmWatching",
         });
-      } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+      } else if (mainMenu2Selected === "LISTA DE DESEJOS") {
         setConfirmDialog({
           isOpen: false,
           message: `Quer adicionar `,
@@ -22,13 +22,13 @@ export default function SearchedFilm({ film }) {
         });
       }
     } else if (bottomMenuSelected === "Séries") {
-      if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+      if (mainMenu2Selected === "LIDOS/ASSISTIDOS") {
         setConfirmDialog({
           isOpen: false,
           message: `Quer adicionar `,
           type: "addTvShowWatching",
         });
-      } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+      } else if (mainMenu2Selected === "LISTA DE DESEJOS") {
         setConfirmDialog({
           isOpen: false,
           message: `Quer adicionar `,

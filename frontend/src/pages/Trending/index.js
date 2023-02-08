@@ -10,7 +10,7 @@ import MediaTypeSelection from "./MediaTypeSelection";
 import TrendingBox from "./TrendingBox";
 
 export default function Trending() {
-  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected, mainMenu1Selected } = useContext(UserContext);
   const [medias, setMedias] = useState([]);
   const [mediaSelected, setMediaSelected] = useState("");
 
@@ -18,24 +18,24 @@ export default function Trending() {
     async function getMedias() {
       try {
         let newMedias;
-        if (mediaSelected === "films" && mainMenuSelected === "POPULARES") {
+        if (mediaSelected === "films" && mainMenu1Selected === "POPULARES") {
           newMedias = await getApiTrendingFilms("popular");
           setMedias(newMedias.results);
         } else if (
           mediaSelected === "films" &&
-          mainMenuSelected === "PASSANDO HOJE"
+          mainMenu1Selected === "PASSANDO HOJE"
         ) {
           newMedias = await getApiTrendingFilms("now_playing");
           setMedias(newMedias.results);
         } else if (
           mediaSelected === "tvshows" &&
-          mainMenuSelected === "POPULARES"
+          mainMenu1Selected === "POPULARES"
         ) {
           newMedias = await getApiTrendingTvShows("popular");
           setMedias(newMedias.results);
         } else if (
           mediaSelected === "tvshows" &&
-          mainMenuSelected === "PASSANDO HOJE"
+          mainMenu1Selected === "PASSANDO HOJE"
         ) {
           newMedias = await getApiTrendingTvShows("now_playing");
           setMedias(newMedias.results);
@@ -45,10 +45,10 @@ export default function Trending() {
       }
     }
     getMedias();
-  }, [mainMenuSelected, mediaSelected]);
+  }, [mainMenu1Selected, mediaSelected]);
 
   if (bottomMenuSelected !== "Início") return <></>;
-  if (mainMenuSelected === "POPULARES") {
+  if (mainMenu1Selected === "POPULARES") {
     return (
       <Wrapper>
         <MediaTypeSelection
@@ -67,7 +67,7 @@ export default function Trending() {
         {mediaSelected && medias.length === 0 ? <LoadingAnimation /> : ""}
       </Wrapper>
     );
-  } else if (mainMenuSelected === "PASSANDO HOJE") {
+  } else if (mainMenu1Selected === "PASSANDO HOJE") {
     return (
       <Wrapper>
         <MediaTypeSelection

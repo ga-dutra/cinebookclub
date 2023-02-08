@@ -65,10 +65,8 @@ async function getApiTrendingFilms(type) {
 async function getApiTrendingTvShows(type) {
   const api_key = process.env.REACT_APP_MOVIEDB_API_KEY;
   let response;
-  console.log("teste");
   try {
     if (type === "popular") {
-      console.log("teste");
       response = await axios.get(
         `
         https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=pt-BR&region=BR&page=1`
