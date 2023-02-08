@@ -15,7 +15,6 @@ export default function FilmSearchBox() {
   const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
   const { bottomMenuSelected } = useContext(UserContext);
-  const [render, setRender] = useState(0);
 
   useEffect(() => {
     async function updateFilmsList() {
@@ -46,11 +45,13 @@ export default function FilmSearchBox() {
             newList.push(filmUnity);
           });
           setFilmsList(newList);
-          setRender(render + 1);
         }
       } else setFilmsList([]);
     }
-    updateFilmsList();
+    const timerId = setTimeout(() => {
+      updateFilmsList();
+    }, 350);
+    return () => clearTimeout(timerId);
   }, [search]);
 
   useEffect(() => {
