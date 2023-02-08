@@ -12,7 +12,6 @@ const unavailableImg =
 const imgURLbase = "https://image.tmdb.org/t/p/w220_and_h330_face";
 export default function FilmSearchBox() {
   const [search, setSearch] = useState("");
-  const [films, setFilms] = useState([]);
   const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
   const { bottomMenuSelected } = useContext(UserContext);
@@ -26,7 +25,7 @@ export default function FilmSearchBox() {
             ? await getApiFilms(search)
             : await getApiTvShows(search);
 
-        setFilms(requisition.data.results.slice(0, 5));
+        const films = requisition.data.results.slice(0, 5);
         const newList = [];
         if (films) {
           films.forEach((film) => {
