@@ -15,30 +15,41 @@ export default function Trending() {
   const [mediaSelected, setMediaSelected] = useState("");
 
   useEffect(() => {
+    function sortMediaByGrade(array) {
+      array.sort(function (a, b) {
+        return b.vote_average - a.vote_average;
+      });
+      return array;
+    }
     async function getMedias() {
       try {
         let newMedias;
         if (mediaSelected === "films" && mainMenu1Selected === "POPULARES") {
-          newMedias = await getApiTrendingFilms("popular");
-          setMedias(newMedias.results);
+          newMedias = (await getApiTrendingFilms("popular")).results;
+          newMedias = sortMediaByGrade(newMedias);
+          console.log(newMedias);
+          setMedias(newMedias);
         } else if (
           mediaSelected === "films" &&
           mainMenu1Selected === "PASSANDO HOJE"
         ) {
-          newMedias = await getApiTrendingFilms("now_playing");
-          setMedias(newMedias.results);
+          newMedias = (await getApiTrendingFilms("now_playing")).results;
+          newMedias = sortMediaByGrade(newMedias);
+          setMedias(newMedias);
         } else if (
           mediaSelected === "tvshows" &&
           mainMenu1Selected === "POPULARES"
         ) {
-          newMedias = await getApiTrendingTvShows("popular");
-          setMedias(newMedias.results);
+          newMedias = (await getApiTrendingTvShows("popular")).results;
+          newMedias = sortMediaByGrade(newMedias);
+          setMedias(newMedias);
         } else if (
           mediaSelected === "tvshows" &&
           mainMenu1Selected === "PASSANDO HOJE"
         ) {
-          newMedias = await getApiTrendingTvShows("now_playing");
-          setMedias(newMedias.results);
+          newMedias = (await getApiTrendingTvShows("now_playing")).results;
+          newMedias = sortMediaByGrade(newMedias);
+          setMedias(newMedias);
         }
       } catch (error) {
         console.log(error);
@@ -59,7 +70,9 @@ export default function Trending() {
           {medias.length !== 0 && mediaSelected !== ""
             ? medias.map((media) => {
                 if (media.backdrop_path) {
-                  return <TrendingBox media={media}></TrendingBox>;
+                  return (
+                    <TrendingBox key={media.id} media={media}></TrendingBox>
+                  );
                 }
               })
             : ""}

@@ -6,7 +6,10 @@ export default function TrendingBox({ media }) {
     !(
       media.origin_country.includes("BR") ||
       media.origin_country.includes("US") ||
-      media.origin_country.includes("CA")
+      media.origin_country.includes("CA") ||
+      media.origin_country.includes("IN") ||
+      media.origin_country.includes("JN") ||
+      media.origin_country.includes("KO")
     )
   )
     return <></>;
@@ -28,9 +31,7 @@ export default function TrendingBox({ media }) {
               : media.name.split("-")[0].original_name
           }
         >
-          {media.title
-            ? media.title.split("-")[0]
-            : media.original_name.split("-")[0]}
+          {media.title ? media.title.split("-")[0] : media.name.split("-")[0]}
         </MediaTitle>
         <MediaRating>{Number(media.vote_average).toFixed(1)}</MediaRating>
       </MediaDescription>
@@ -43,9 +44,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 150px;
   height: 320px;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: #fec5bb;
-  margin: 12px 14px;
+  margin: 12px 12px;
   font-family: "Lato", sans-serif;
   align-items: center;
   justify-content: flex-start;
@@ -54,6 +55,7 @@ const Wrapper = styled.div`
 const MediaPicture = styled.img`
   width: 100%;
   height: auto;
+  border-radius: 6px;
 `;
 
 const MediaTitle = styled.h1`
