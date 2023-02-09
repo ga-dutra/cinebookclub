@@ -8,6 +8,9 @@ async function listUserBooksWishList(user_id: number) {
     where: {
       user_id,
     },
+    orderBy: {
+      created_at: "desc",
+    },
   });
 }
 
@@ -58,6 +61,9 @@ async function listUserFilmsWishList(user_id: number) {
     where: {
       user_id,
     },
+    orderBy: {
+      created_at: "desc",
+    },
   });
 }
 
@@ -65,6 +71,9 @@ async function listUserTvShowsWishList(user_id: number) {
   return await prisma.tv_shows_wishlist.findMany({
     where: {
       user_id,
+    },
+    orderBy: {
+      created_at: "desc",
     },
   });
 }

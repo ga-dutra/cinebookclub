@@ -5,16 +5,17 @@ import { UserContext } from "../../contexts/userContext";
 import SearchBox from "./BookSearchBox";
 
 export default function Books() {
-  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected, mainMenu2Selected } = useContext(UserContext);
+
   if (bottomMenuSelected !== "Livros") return <></>;
-  if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+  if (mainMenu2Selected === "LIDOS/ASSISTIDOS") {
     return (
       <>
         <SearchBox></SearchBox>
         <Readings></Readings>
       </>
     );
-  } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+  } else if (mainMenu2Selected === "LISTA DE DESEJOS") {
     return (
       <>
         <SearchBox></SearchBox>

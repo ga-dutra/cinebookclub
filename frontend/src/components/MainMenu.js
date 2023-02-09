@@ -1,9 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/userContext";
+import { SearchContext } from "../contexts/searchContext";
 
 export default function MainMenu() {
-  const { mainMenuSelected, setMainMenuSelected } = useContext(UserContext);
+  const {
+    mainMenu1Selected,
+    setMainMenu1Selected,
+    mainMenu2Selected,
+    setMainMenu2Selected,
+  } = useContext(UserContext);
   const { bottomMenuSelected } = useContext(UserContext);
 
   if (bottomMenuSelected === "Início") {
@@ -11,12 +17,12 @@ export default function MainMenu() {
       <MenuWrapper>
         <MenuOption
           name={"POPULARES"}
-          setMainMenuSelected={setMainMenuSelected}
-          mainMenuSelected={mainMenuSelected}
+          setMainMenu={setMainMenu1Selected}
+          mainMenu={mainMenu1Selected}
         ></MenuOption>
         <MenuOption
-          setMainMenuSelected={setMainMenuSelected}
-          mainMenuSelected={mainMenuSelected}
+          setMainMenu={setMainMenu1Selected}
+          mainMenu={mainMenu1Selected}
           name={"PASSANDO HOJE"}
         ></MenuOption>
       </MenuWrapper>
@@ -26,34 +32,38 @@ export default function MainMenu() {
       <MenuWrapper>
         <MenuOption
           name={"LIDOS/ASSISTIDOS"}
-          setMainMenuSelected={setMainMenuSelected}
-          mainMenuSelected={mainMenuSelected}
+          setMainMenu={setMainMenu2Selected}
+          mainMenu={mainMenu2Selected}
         ></MenuOption>
         <MenuOption
-          setMainMenuSelected={setMainMenuSelected}
-          mainMenuSelected={mainMenuSelected}
+          setMainMenu={setMainMenu2Selected}
+          mainMenu={mainMenu2Selected}
           name={"LISTA DE DESEJOS"}
         ></MenuOption>
       </MenuWrapper>
     );
 }
 
-function MenuOption({ name, mainMenuSelected, setMainMenuSelected }) {
+function MenuOption({ name, mainMenu, setMainMenu }) {
   const [isSelected, setIsSelected] = useState(false);
-  function selectMenu() {
-    if (mainMenuSelected !== name) {
+  const { inputCleaner, setInputCleaner } = useContext(SearchContext);
+  useEffect(() => {
+    if (mainMenu === name) {
       setIsSelected(true);
-      setMainMenuSelected(name);
-    } else {
-      setIsSelected(!isSelected);
-      setMainMenuSelected("");
+    }
+  }, [name, mainMenu]);
+  function selectMenu() {
+    if (mainMenu !== name) {
+      setIsSelected(true);
+      setMainMenu(name);
+      setInputCleaner(!inputCleaner);
     }
   }
   return (
     <OptionWrapper
       onClick={selectMenu}
       isSelected={isSelected}
-      mainMenuSelected={mainMenuSelected}
+      mainMenuSelected={mainMenu}
       name={name}
     >
       {name}

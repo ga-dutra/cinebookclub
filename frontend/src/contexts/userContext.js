@@ -5,8 +5,10 @@ const UserContext = createContext();
 
 const UserStorage = ({ children }) => {
   const [userData, setUserData] = useLocalStorage("userData", {});
-  const [bottomMenuSelected, setBottomMenuSelected] = useState("");
-  const [mainMenuSelected, setMainMenuSelected] = useState("");
+  const [bottomMenuSelected, setBottomMenuSelected] = useState("Início");
+  const [mainMenu1Selected, setMainMenu1Selected] = useState("POPULARES");
+  const [mainMenu2Selected, setMainMenu2Selected] =
+    useState("LIDOS/ASSISTIDOS");
   return (
     <UserContext.Provider
       value={{
@@ -14,8 +16,10 @@ const UserStorage = ({ children }) => {
         setUserData,
         bottomMenuSelected,
         setBottomMenuSelected,
-        mainMenuSelected,
-        setMainMenuSelected,
+        mainMenu1Selected,
+        setMainMenu1Selected,
+        mainMenu2Selected,
+        setMainMenu2Selected,
       }}
     >
       {children}

@@ -10,16 +10,14 @@ const unavailableImg =
   "https://www.fullperformance.com.br/images/evento/2020-03-01_1a_logo_default3.jpg";
 export default function SearchBox() {
   const [search, setSearch] = useState("");
-  const [books, setBooks] = useState([]);
   const [booksList, setBooksList] = useState([]);
-  const [render, setRender] = useState(0);
   const { inputCleaner } = useContext(SearchContext);
 
   useEffect(() => {
     async function updateBooksList() {
       if (search.length > 3) {
         const requisition = await getApiBooks(search);
-        setBooks(requisition.data.items);
+        const books = requisition.data.items;
         const newList = [];
         if (books) {
           books.forEach((book) => {
@@ -39,10 +37,12 @@ export default function SearchBox() {
           });
         }
         setBooksList(newList);
-        setRender(render + 1);
       } else setBooksList([]);
     }
-    updateBooksList();
+    const timerId = setTimeout(() => {
+      updateBooksList();
+    }, 350);
+    return () => clearTimeout(timerId);
   }, [search]);
 
   useEffect(() => {
@@ -60,6 +60,11 @@ export default function SearchBox() {
           value={search}
           debounceTimeout={300}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key.toLowerCase() === "enter") {
+              e.preventDefault();
+            }
+          }}
         ></DebounceInput>
       </BoxSearch>
       <StyledSearch>

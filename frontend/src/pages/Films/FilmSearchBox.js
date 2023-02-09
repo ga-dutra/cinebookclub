@@ -12,11 +12,9 @@ const unavailableImg =
 const imgURLbase = "https://image.tmdb.org/t/p/w220_and_h330_face";
 export default function FilmSearchBox() {
   const [search, setSearch] = useState("");
-  const [films, setFilms] = useState([]);
   const [filmsList, setFilmsList] = useState([]);
   const { inputCleaner } = useContext(SearchContext);
   const { bottomMenuSelected } = useContext(UserContext);
-  const [render, setRender] = useState(0);
 
   useEffect(() => {
     async function updateFilmsList() {
@@ -26,7 +24,7 @@ export default function FilmSearchBox() {
             ? await getApiFilms(search)
             : await getApiTvShows(search);
 
-        setFilms(requisition.data.results.slice(0, 5));
+        const films = requisition.data.results.slice(0, 5);
         const newList = [];
         if (films) {
           films.forEach((film) => {
@@ -47,11 +45,13 @@ export default function FilmSearchBox() {
             newList.push(filmUnity);
           });
           setFilmsList(newList);
-          setRender(render + 1);
         }
       } else setFilmsList([]);
     }
-    updateFilmsList();
+    const timerId = setTimeout(() => {
+      updateFilmsList();
+    }, 350);
+    return () => clearTimeout(timerId);
   }, [search]);
 
   useEffect(() => {
@@ -69,6 +69,11 @@ export default function FilmSearchBox() {
           value={search}
           debounceTimeout={300}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key.toLowerCase() === "enter") {
+              e.preventDefault();
+            }
+          }}
         ></DebounceInput>
       </BoxSearch>
       <StyledSearch>

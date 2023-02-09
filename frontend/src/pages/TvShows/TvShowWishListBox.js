@@ -74,7 +74,7 @@ const TvShowDescription = styled.div`
   justify-content: center;
   text-align: center;
   padding-left: 6px;
-  width: 120px;
+  width: 136px;
   max-height: 60px;
   h1 {
     font-weight: 700;

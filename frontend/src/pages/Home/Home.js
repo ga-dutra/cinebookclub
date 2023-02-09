@@ -10,7 +10,7 @@ import TvShows from "../TvShows/index.js";
 import Trending from "../Trending";
 
 export default function Home() {
-  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected } = useContext(UserContext);
 
   return (
     <Wrapper>

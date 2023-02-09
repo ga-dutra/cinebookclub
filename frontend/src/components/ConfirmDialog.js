@@ -81,7 +81,7 @@ export default function ConfirmDialog({
           <h6>{book.title} ?</h6>
         </DialogContent>
         <DialogActions>
-          <Button color={"green"} onClick={handleConfirmationDialog}>
+          <Button color={"blue"} onClick={handleConfirmationDialog}>
             Sim
           </Button>
           <Button
@@ -110,6 +110,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px 0;
+  border: 1px solid #f08080;
   h6 {
     font-family: "Barlow Condensed", sans-serif;
     font-weight: 500;
@@ -132,6 +133,7 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: 600;
   border-radius: 4px;
+  color: #ffffff;
 `;
 
 const BookImage = styled.img`

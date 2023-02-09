@@ -18,11 +18,12 @@ async function getUserTvShowsWishlist(user_id: number) {
 async function postTvShowWishList(data: TvShowWishListIncomplete) {
   const apiURI = `https://api.themoviedb.org/3/tv/${data.api_id}?api_key=${process.env.MOVIEDB_API_KEY}&language=pt-BR`;
   const tvShowDetails = await axios.get(apiURI);
-
   const fullTvShow: TvShowWishList = {
     ...data,
     tagline: tvShowDetails.data.tagline,
-    creator: tvShowDetails.data.created_by[0].name,
+    creator: tvShowDetails.data.created_by[0]
+      ? tvShowDetails.data.created_by[0].name
+      : "",
     seasons_number: tvShowDetails.data.number_of_seasons,
   };
   try {

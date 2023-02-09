@@ -1,84 +1,69 @@
+import styled from "styled-components";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
 } from "@material-ui/core";
-import { useContext } from "react";
-import styled from "styled-components";
-import { SearchContext } from "../../contexts/searchContext";
-import useToken from "../../hooks/useToken";
 import {
-  postNewWatching,
   postNewFilmWishList,
   postNewTvShowWishList,
 } from "../../services/services";
+import useToken from "../../hooks/useToken";
 import { toast } from "react-toastify";
 
-export default function FilmConfirmDialog({
+export default function TrendingConfirmDialog({
   confirmDialog,
   setConfirmDialog,
-  film,
+  media,
 }) {
+  let mediaWished;
   const token = useToken();
-  const { inputCleaner, setInputCleaner } = useContext(SearchContext);
+  const unavailableImg =
+    "https://www.fullperformance.com.br/images/evento/2020-03-01_1a_logo_default3.jpg";
+  const imgURLbase = "https://image.tmdb.org/t/p/w220_and_h330_face";
   function handleConfirmationDialog() {
-    if (
-      confirmDialog.type === "addFilmWatching" ||
-      confirmDialog.type === "addTvShowWatching"
-    ) {
-      addNewWatching();
-    } else if (
-      confirmDialog.type === "addFilmWishList" ||
-      confirmDialog.type === "addTvShowWishList"
-    ) {
-      addFilmWishList();
-    }
+    mediaWished = {
+      title: media.title || media.name,
+      img: media.poster_path
+        ? `${imgURLbase}${media.poster_path}`
+        : unavailableImg,
+      overview: media.overview || "...",
+      api_id: String(media.id),
+      vote_average: media.vote_average,
+      medias_id: confirmDialog.type === "addFilmWishList" ? 2 : 3,
+    };
+    addFilmWishList(mediaWished);
   }
 
-  async function addNewWatching() {
+  async function addFilmWishList(mediaWished) {
     try {
-      await postNewWatching(token, film);
-      setConfirmDialog({
-        ...confirmDialog,
-        isOpen: false,
-      });
-      toast(`${film.title} adicionado com sucesso!`);
-      setInputCleaner(!inputCleaner);
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 409) {
-        toast(`${film.title} já está na sua lista!`);
-        setConfirmDialog({
-          ...confirmDialog,
-          isOpen: false,
-        });
-        setInputCleaner(!inputCleaner);
-      }
-    }
-  }
-
-  async function addFilmWishList() {
-    try {
-      delete film.release_date;
       confirmDialog.type === "addFilmWishList"
-        ? await postNewFilmWishList(token, film)
-        : await postNewTvShowWishList(token, film);
+        ? await postNewFilmWishList(token, mediaWished)
+        : await postNewTvShowWishList(token, mediaWished);
       setConfirmDialog({
         ...confirmDialog,
         isOpen: false,
       });
-      toast(`${film.title} adicionado com sucesso!`);
-      setInputCleaner(!inputCleaner);
+      toast(
+        `${mediaWished.title} adicionado com sucesso à sua lista de desejos!`
+      );
     } catch (error) {
       console.log(error);
       if (error.response.status === 409) {
-        toast(`${film.title} já está na sua lista!`);
+        toast(`${mediaWished.title} já está na sua lista de desejos!`);
         setConfirmDialog({
           ...confirmDialog,
           isOpen: false,
         });
-        setInputCleaner(!inputCleaner);
+      } else {
+        toast(
+          `Não foi possível adicionar ${mediaWished.title} à sua lista de desejos.`
+        );
+        setConfirmDialog({
+          ...confirmDialog,
+          isOpen: false,
+        });
       }
     }
   }
@@ -87,11 +72,14 @@ export default function FilmConfirmDialog({
     <Dialog open={confirmDialog.isOpen}>
       <Wrapper>
         <DialogTitle>
-          <FilmImage src={film.img}></FilmImage>
+          <MediaImage
+            src={`${imgURLbase}${media.poster_path}` || unavailableImg}
+          ></MediaImage>
         </DialogTitle>
         <DialogContent>
           <h5>Adicionar</h5>
-          <h6>{film.title} ?</h6>
+          <h6>{media.title || media.name}</h6>
+          <h5>À sua lista de desejos?</h5>
         </DialogContent>
         <DialogActions>
           <Button color={"blue"} onClick={handleConfirmationDialog}>
@@ -99,12 +87,12 @@ export default function FilmConfirmDialog({
           </Button>
           <Button
             color={"red"}
-            onClick={() =>
+            onClick={() => {
               setConfirmDialog({
                 ...confirmDialog,
                 isOpen: false,
-              })
-            }
+              });
+            }}
           >
             Não
           </Button>
@@ -113,17 +101,19 @@ export default function FilmConfirmDialog({
     </Dialog>
   );
 }
+
 const Wrapper = styled.div`
   background-color: #ffd7ba;
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: auto;
-  max-height: 320px;
+  max-width: 290px;
+  max-height: 500px;
   align-items: center;
   justify-content: center;
   padding: 10px 0;
   border: 1px solid #f08080;
+
   h6 {
     font-family: "Barlow Condensed", sans-serif;
     font-weight: 500;
@@ -135,6 +125,10 @@ const Wrapper = styled.div`
     font-size: 21px;
     margin-top: -10px;
     margin-bottom: 4px;
+  }
+  h5:nth-last-child(1) {
+    margin-top: 5px;
+    margin-bottom: -2px;
   }
 `;
 const Button = styled.button`
@@ -149,8 +143,9 @@ const Button = styled.button`
   color: #ffffff;
 `;
 
-const FilmImage = styled.img`
-  width: 90px;
-  height: 130px;
+const MediaImage = styled.img`
+  width: 148px;
+  height: 210px;
+  border-radius: 6px;
   margin-bottom: -12px;
 `;

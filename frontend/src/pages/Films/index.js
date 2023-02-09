@@ -5,16 +5,16 @@ import Watchings from "./Watchings.js";
 import FilmsWishList from "./FilmsWishList";
 
 export default function Films() {
-  const { bottomMenuSelected, mainMenuSelected } = useContext(UserContext);
+  const { bottomMenuSelected, mainMenu2Selected } = useContext(UserContext);
   if (bottomMenuSelected !== "Filmes") return <></>;
-  if (mainMenuSelected === "LIDOS/ASSISTIDOS") {
+  if (mainMenu2Selected === "LIDOS/ASSISTIDOS") {
     return (
       <>
         <FilmSearchBox></FilmSearchBox>
         <Watchings></Watchings>
       </>
     );
-  } else if (mainMenuSelected === "LISTA DE DESEJOS") {
+  } else if (mainMenu2Selected === "LISTA DE DESEJOS") {
     return (
       <>
         <FilmSearchBox></FilmSearchBox>
