@@ -13,6 +13,14 @@ async function postSignIn(body) {
   return response.data;
 }
 
+async function validateLocalStorageToken(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`${baseUrl}/users/storagetoken`, config);
+  return response.data;
+}
+
 async function getUserReadings(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -194,4 +202,5 @@ export {
   deleteBookWishList,
   deleteFilmWishList,
   deleteTvShowWishList,
+  validateLocalStorageToken,
 };

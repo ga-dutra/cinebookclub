@@ -8,6 +8,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import { ToastContainer } from "react-toastify";
 import useToken from "./hooks/useToken";
 import { Navigate } from "react-router-dom";
+import { validateLocalStorageToken } from "./services/services";
 
 export default function App() {
   return (
@@ -39,6 +40,18 @@ export default function App() {
 
 function ProtectedRouteGuard({ children }) {
   const token = useToken();
+
+  async function validateToken() {
+    try {
+      await validateLocalStorageToken(token);
+    } catch (error) {
+      window.localStorage.removeItem("userData");
+      window.location.reload(false);
+      return;
+    }
+  }
+  if (token) validateToken();
+
   if (!token) {
     return <Navigate to="/login" />;
   }
