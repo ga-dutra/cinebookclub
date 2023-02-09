@@ -60,6 +60,11 @@ export default function SearchBox() {
           value={search}
           debounceTimeout={300}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key.toLowerCase() === "enter") {
+              e.preventDefault();
+            }
+          }}
         ></DebounceInput>
       </BoxSearch>
       <StyledSearch>
