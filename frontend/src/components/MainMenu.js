@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/userContext";
+import { SearchContext } from "../contexts/searchContext";
 
 export default function MainMenu() {
   const {
@@ -45,15 +46,17 @@ export default function MainMenu() {
 
 function MenuOption({ name, mainMenu, setMainMenu }) {
   const [isSelected, setIsSelected] = useState(false);
+  const { inputCleaner, setInputCleaner } = useContext(SearchContext);
   useEffect(() => {
     if (mainMenu === name) {
       setIsSelected(true);
     }
-  }, []);
+  }, [name, mainMenu]);
   function selectMenu() {
     if (mainMenu !== name) {
       setIsSelected(true);
       setMainMenu(name);
+      setInputCleaner(!inputCleaner);
     }
   }
   return (
