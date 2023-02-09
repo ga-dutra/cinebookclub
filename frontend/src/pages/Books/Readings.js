@@ -3,6 +3,7 @@ import BookBox from "./ReadingBox";
 import useToken from "../../hooks/useToken";
 import { getUserReadings } from "../../services/services";
 import { SearchContext } from "../../contexts/searchContext";
+import CentralMessage from "../../components/CentralMessage";
 
 export default function Readings() {
   const token = useToken();
@@ -23,6 +24,10 @@ export default function Readings() {
       ))}
     </>
   ) : (
-    ""
+    <CentralMessage
+      message={
+        "Você ainda não possui leituras cadastradas. Adicione-as, pesquisando acima."
+      }
+    />
   );
 }

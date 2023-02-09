@@ -12,7 +12,10 @@ export default function TvShowWishListBox({ tvshow }) {
       <TvShowDescription>
         <h1>{tvshow.title}</h1>
         <h2>{tvshow.creator}</h2>
-        <h4>{tvshow.seasons_number} temporadas</h4>
+        <h4>
+          {tvshow.seasons_number} temporada
+          {Number(tvshow.seasons_number) !== 1 ? "s" : ""}
+        </h4>
       </TvShowDescription>{" "}
       <TvShowPicture src={tvshow.img} alt={`${tvshow.title} poster`} />{" "}
       <TvShowDescription>

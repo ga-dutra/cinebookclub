@@ -66,7 +66,7 @@ const MenuWrapper = styled.div`
   bottom: 0;
   left: 0;
   display: flex;
-  height: 100px;
+  height: 90px;
   width: 100vw;
   z-index: 5;
   align-items: center;
@@ -92,8 +92,8 @@ const IconWrapper = styled.div`
 `;
 
 const IconName = styled.h1`
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 20px;
+  font-family: "Righteous", cursive;
+  font-size: 16px;
   font-weight: ${(props) =>
     props.bottomMenuSelected === props.name ? 700 : 500};
 `;
