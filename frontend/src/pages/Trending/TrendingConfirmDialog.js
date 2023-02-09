@@ -56,6 +56,14 @@ export default function TrendingConfirmDialog({
           ...confirmDialog,
           isOpen: false,
         });
+      } else {
+        toast(
+          `Não foi possível adicionar ${mediaWished.title} à sua lista de desejos.`
+        );
+        setConfirmDialog({
+          ...confirmDialog,
+          isOpen: false,
+        });
       }
     }
   }

@@ -74,7 +74,7 @@ const FilmDescription = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 120px;
+  width: 134px;
   max-height: 60px;
   h1 {
     font-weight: 700;
@@ -87,8 +87,7 @@ const FilmDescription = styled.div`
     font-style: italic;
   }
   h3 {
-    font-size: 14px;
-    max-width: 120px;
+    font-size: 15px;
   }
   h4 {
     font-size: 13px;

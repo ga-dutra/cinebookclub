@@ -74,12 +74,15 @@ const BookDescription = styled.div`
   justify-content: center;
   text-align: center;
   padding-left: 8px;
-  max-width: 140px;
+  width: 134px;
   max-height: 60px;
   h1 {
     font-weight: 700;
-    font-size: 17.5px;
+    font-size: 16px;
     margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 15px;
   }
   h2,
   span {
