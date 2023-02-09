@@ -1,6 +1,25 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import TrendingConfirmDialog from "./TrendingConfirmDialog";
 
 export default function TrendingBox({ media }) {
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
+
+  useEffect(() => {
+    if (media.origin_country) {
+      setConfirmDialog({
+        isOpen: false,
+        message: `Quer adicionar `,
+        type: "addTvShowWishList",
+      });
+    } else {
+      setConfirmDialog({
+        isOpen: false,
+        message: `Quer adicionar `,
+        type: "addFilmWishList",
+      });
+    }
+  }, []);
   if (
     media.origin_country &&
     !(
@@ -20,10 +39,17 @@ export default function TrendingBox({ media }) {
   return (
     <Wrapper>
       <MediaPicture
+        onClick={() => {
+          setConfirmDialog({ ...confirmDialog, isOpen: true });
+        }}
         src={`${imgURLbase}${media.backdrop_path}` || unavailableImg}
         alt={`${media.title} poster`}
       />
-      <MediaDescription>
+      <MediaDescription
+        onClick={() => {
+          setConfirmDialog({ ...confirmDialog, isOpen: true });
+        }}
+      >
         <MediaTitle
           length={
             media.title
@@ -35,6 +61,13 @@ export default function TrendingBox({ media }) {
         </MediaTitle>
         <MediaRating>{Number(media.vote_average).toFixed(1)}</MediaRating>
       </MediaDescription>
+      <TrendingConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        img={media.img}
+        title={media.title}
+        media={media}
+      />
     </Wrapper>
   );
 }
@@ -55,6 +88,7 @@ const Wrapper = styled.div`
 const MediaPicture = styled.img`
   width: 100%;
   height: auto;
+  object-fit: contain;
   border-radius: 6px;
 `;
 
