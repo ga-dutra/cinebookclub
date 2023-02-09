@@ -4,12 +4,12 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL;
 const localBaseUrl = "http://localhost:4000";
 
 async function postSignUp(body) {
-  const response = await axios.post(`${localBaseUrl}/users/signup`, body);
+  const response = await axios.post(`${baseUrl}/users/signup`, body);
   return response.data;
 }
 
 async function postSignIn(body) {
-  const response = await axios.post(`${localBaseUrl}/users/signin`, body);
+  const response = await axios.post(`${baseUrl}/users/signin`, body);
   return response.data;
 }
 
@@ -17,7 +17,7 @@ async function getUserReadings(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${localBaseUrl}/readings`, config);
+  const response = await axios.get(`${baseUrl}/readings`, config);
 
   return response.data;
 }
@@ -26,10 +26,7 @@ async function getUserWatchings(token, medias_id) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(
-    `${localBaseUrl}/watchings/${medias_id}`,
-    config
-  );
+  const response = await axios.get(`${baseUrl}/watchings/${medias_id}`, config);
 
   return response.data;
 }
@@ -38,11 +35,7 @@ async function postNewReading(token, newReading) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(
-    `${localBaseUrl}/readings`,
-    newReading,
-    config
-  );
+  const response = await axios.post(`${baseUrl}/readings`, newReading, config);
   return response.data;
 }
 
@@ -51,7 +44,7 @@ async function postNewWatching(token, newWatching) {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.post(
-    `${localBaseUrl}/watchings`,
+    `${baseUrl}/watchings`,
     newWatching,
     config
   );
@@ -63,7 +56,7 @@ async function updateBookGradeOrReviewOrDate(token, book_api_id, data) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.put(`${localBaseUrl}/readings`, body, config);
+  const response = await axios.put(`${baseUrl}/readings`, body, config);
   return response.data;
 }
 
@@ -72,7 +65,7 @@ async function updateWatchingGradeOrReviewOrDate(token, api_id, data) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.put(`${localBaseUrl}/watchings`, body, config);
+  const response = await axios.put(`${baseUrl}/watchings`, body, config);
   return response.data;
 }
 
@@ -80,7 +73,7 @@ async function getUserBooksWishlist(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${localBaseUrl}/books`, config);
+  const response = await axios.get(`${baseUrl}/books`, config);
   return response.data;
 }
 
@@ -88,7 +81,7 @@ async function getUserFilmsWishlist(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${localBaseUrl}/films`, config);
+  const response = await axios.get(`${baseUrl}/films`, config);
   return response.data;
 }
 
@@ -96,7 +89,7 @@ async function getUserTvShowsWishlist(token) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`${localBaseUrl}/tvshows`, config);
+  const response = await axios.get(`${baseUrl}/tvshows`, config);
   return response.data;
 }
 
@@ -105,7 +98,7 @@ async function postNewBookWishList(token, newBookWishList) {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.post(
-    `${localBaseUrl}/books`,
+    `${baseUrl}/books`,
     newBookWishList,
     config
   );
@@ -117,7 +110,7 @@ async function postNewFilmWishList(token, newFilmWishList) {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.post(
-    `${localBaseUrl}/films`,
+    `${baseUrl}/films`,
     newFilmWishList,
     config
   );
@@ -129,7 +122,7 @@ async function postNewTvShowWishList(token, newTvShowWishList) {
     headers: { Authorization: `Bearer ${token}` },
   };
   const response = await axios.post(
-    `${localBaseUrl}/tvshows`,
+    `${baseUrl}/tvshows`,
     newTvShowWishList,
     config
   );
@@ -141,7 +134,7 @@ async function deleteReading(token, book_api_id) {
     headers: { Authorization: `Bearer ${token}` },
     data: { book_api_id },
   };
-  const response = await axios.delete(`${localBaseUrl}/readings`, config);
+  const response = await axios.delete(`${baseUrl}/readings`, config);
   return response.data;
 }
 
@@ -150,7 +143,7 @@ async function deleteWatching(token, api_id, medias_id) {
     headers: { Authorization: `Bearer ${token}` },
     data: { api_id, medias_id },
   };
-  const response = await axios.delete(`${localBaseUrl}/watchings`, config);
+  const response = await axios.delete(`${baseUrl}/watchings`, config);
   return response.data;
 }
 
@@ -159,7 +152,7 @@ async function deleteBookWishList(token, book_api_id) {
     headers: { Authorization: `Bearer ${token}` },
     data: { book_api_id },
   };
-  const response = await axios.delete(`${localBaseUrl}/books`, config);
+  const response = await axios.delete(`${baseUrl}/books`, config);
   return response.data;
 }
 
@@ -168,7 +161,7 @@ async function deleteFilmWishList(token, api_id) {
     headers: { Authorization: `Bearer ${token}` },
     data: { api_id },
   };
-  const response = await axios.delete(`${localBaseUrl}/films`, config);
+  const response = await axios.delete(`${baseUrl}/films`, config);
   return response.data;
 }
 
@@ -177,7 +170,7 @@ async function deleteTvShowWishList(token, api_id) {
     headers: { Authorization: `Bearer ${token}` },
     data: { api_id },
   };
-  const response = await axios.delete(`${localBaseUrl}/tvshows`, config);
+  const response = await axios.delete(`${baseUrl}/tvshows`, config);
   return response.data;
 }
 
