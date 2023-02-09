@@ -3,6 +3,7 @@ import useToken from "../../hooks/useToken";
 import { SearchContext } from "../../contexts/searchContext";
 import { getUserTvShowsWishlist } from "../../services/services";
 import TvShowWishListBox from "./TvShowWishListBox";
+import CentralMessage from "../../components/CentralMessage";
 
 export default function TvShowsWishList() {
   const token = useToken();
@@ -22,6 +23,10 @@ export default function TvShowsWishList() {
       ))}
     </>
   ) : (
-    ""
+    <CentralMessage
+      message={
+        "Você ainda não possui séries na sua lista de desejos. Adicione-as, pesquisando acima ou selecionando a série desejada na aba 'Ínicio'"
+      }
+    />
   );
 }

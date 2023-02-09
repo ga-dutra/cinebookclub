@@ -3,6 +3,7 @@ import useToken from "../../hooks/useToken";
 import { SearchContext } from "../../contexts/searchContext";
 import { getUserFilmsWishlist } from "../../services/services";
 import FilmWishListBox from "./FilmWishListBox";
+import CentralMessage from "../../components/CentralMessage";
 
 export default function FilmsWishList() {
   const token = useToken();
@@ -22,6 +23,10 @@ export default function FilmsWishList() {
       ))}
     </>
   ) : (
-    ""
+    <CentralMessage
+      message={
+        "Você ainda não possui filmes na sua lista de desejos. Adicione-os, pesquisando acima ou selecionando o filme desejado na aba 'Ínicio'"
+      }
+    />
   );
 }

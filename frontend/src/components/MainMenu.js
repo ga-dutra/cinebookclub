@@ -85,8 +85,8 @@ const MenuWrapper = styled.div`
 `;
 
 const OptionWrapper = styled.div`
-  width: 132px;
-  height: 38px;
+  width: 144px;
+  height: 42px;
   background-color: ${(props) =>
     props.mainMenuSelected === props.name && props.isSelected
       ? "#59A5D8"
@@ -100,8 +100,8 @@ const OptionWrapper = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
+  font-family: "Righteous", cursive;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 `;
