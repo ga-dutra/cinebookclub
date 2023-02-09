@@ -24,7 +24,7 @@ export default function TrendingConfirmDialog({
   const imgURLbase = "https://image.tmdb.org/t/p/w220_and_h330_face";
   function handleConfirmationDialog() {
     mediaWished = {
-      title: media.title || media.original_name,
+      title: media.title || media.name,
       img: media.poster_path
         ? `${imgURLbase}${media.poster_path}`
         : unavailableImg,
