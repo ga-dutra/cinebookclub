@@ -129,11 +129,12 @@ const Button = styled.button`
   height: 30px;
   margin: 0 14px;
   background-color: ${(props) => props.color};
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
+  font-family: "Righteous", cursive;
+  font-size: 14px;
+  font-weight: 500;
   border-radius: 4px;
   color: #ffffff;
+  border: 0.5px solid #8a908d;
 `;
 
 const BookImage = styled.img`

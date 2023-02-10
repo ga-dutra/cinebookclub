@@ -76,7 +76,13 @@ export default function Trending() {
               })
             : ""}
         </MediaWrapper>
-        {mediaSelected && medias.length === 0 ? <LoadingAnimation /> : ""}
+        {mediaSelected && medias.length === 0 ? (
+          <LoadingWrapper>
+            <LoadingAnimation />{" "}
+          </LoadingWrapper>
+        ) : (
+          ""
+        )}
       </Wrapper>
     );
   } else if (mainMenu1Selected === "PASSANDO HOJE") {
@@ -97,7 +103,14 @@ export default function Trending() {
               })
             : ""}
         </MediaWrapper>
-        {mediaSelected && medias.length === 0 ? <LoadingAnimation /> : ""}
+        {mediaSelected && medias.length === 0 ? (
+          <LoadingWrapper>
+            {" "}
+            <LoadingAnimation />{" "}
+          </LoadingWrapper>
+        ) : (
+          ""
+        )}
       </Wrapper>
     );
   }
@@ -107,6 +120,7 @@ const Wrapper = styled.div`
   width: calc(100vw - 20px);
   display: flex;
   margin-top: 50px;
+  justify-content: center;
 `;
 
 const MediaWrapper = styled.div`
@@ -115,4 +129,10 @@ const MediaWrapper = styled.div`
   justify-content: center;
   width: 100%;
   margin-left: 20px;
+`;
+
+const LoadingWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  justify-content: center;
 `;
