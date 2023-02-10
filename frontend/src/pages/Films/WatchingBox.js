@@ -58,7 +58,7 @@ export default function WatchingBox({ media }) {
       <MediaPicture src={media.img} alt={`${media.title} poster`} />
       <MediaDescription>
         <h1>{media.title}</h1>
-        <h2>Nota média: {media.vote_average}</h2>
+        <h2>Nota média: {Number(media.vote_average).toFixed(1)}</h2>
       </MediaDescription>
       <RatingWrapper>
         <MediaDescription>
