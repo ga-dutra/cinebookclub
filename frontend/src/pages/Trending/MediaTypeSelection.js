@@ -46,12 +46,14 @@ const SelectionWrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 60px;
+  font-family: "Righteous", cursive;
   select {
     width: ${(props) => (props.value === "" ? "auto" : "86px")};
     background-color: #f8edeb;
     border: 0px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
+    font-family: "Righteous", cursive;
     right: ${(props) =>
       props.value === "" ? "calc(100vw / 2 - 62px)" : "calc(100vw / 2 - 44px)"};
   }

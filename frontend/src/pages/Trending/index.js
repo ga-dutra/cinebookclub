@@ -132,6 +132,7 @@ const MediaWrapper = styled.div`
 `;
 
 const LoadingWrapper = styled.div`
+  position: fixed;
   width: 100%;
   justify-content: center;
 `;

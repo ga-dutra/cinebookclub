@@ -75,11 +75,11 @@ export default function TrendingBox({ media }) {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 150px;
-  height: 320px;
+  width: 142px;
+  height: 310px;
   border-radius: 6px;
   background-color: #fec5bb;
-  margin: 12px 12px;
+  margin: 10px 10px;
   font-family: "Lato", sans-serif;
   align-items: center;
   justify-content: flex-start;
@@ -97,6 +97,7 @@ const MediaTitle = styled.h1`
   font-size: ${(props) => (props.length > 20 ? "16px" : "18px")};
   font-weight: 700;
   width: 80%;
+  padding-top: 14px;
 `;
 
 const MediaRating = styled.div`
