@@ -17,12 +17,15 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
  <p>
 
 ![Javascript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt=""/>
 ![ReactJS](https://img.shields.io/badge/ReactJS-13cf35?style=for-the-badge&logo=react&logoColor=080808)
 ![Styled-Components](https://img.shields.io/badge/Styled-Components-61DAFB?style=for-the-badge&logo=styledcomponents&logoColor=61DAFB)
 ![NodeJS](https://img.shields.io/badge/NodeJS-F7DF1E?style=for-the-badge&logo=node.js&logoColor=080808)
 ![TypeScript](https://img.shields.io/badge/TypeScript-E4405F?style=for-the-badge&logo=typescript&logoColor=ffffff)
 ![Mongodb](https://img.shields.io/badge/Mongodb-fae7b5?style=for-the-badge&logo=mongodb&logoColor=080808)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-78586f?style=for-the-badge&logo=PostgreSQL&logoColor=ffffff)
+<img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt=""/>
+<img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt=""/>
 
 </p>
 
