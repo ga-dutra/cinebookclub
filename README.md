@@ -23,6 +23,7 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
 ![NodeJS](https://img.shields.io/badge/NodeJS-F7DF1E?style=for-the-badge&logo=node.js&logoColor=080808)
 ![TypeScript](https://img.shields.io/badge/TypeScript-E4405F?style=for-the-badge&logo=typescript&logoColor=ffffff)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-78586f?style=for-the-badge&logo=PostgreSQL&logoColor=ffffff)
+![Prisma](https://img.shields.io/badge/Prisma-b57edc?style=for-the-badge&logo=Prisma&logoColor=ffffff)
 <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt=""/>
 <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt=""/>
 
