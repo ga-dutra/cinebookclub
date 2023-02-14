@@ -17,79 +17,50 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
  <p>
 
 ![Javascript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+<img src="https://img.shields.io/badge/Express.js-e9967a?style=for-the-badge&logo=express&logoColor=white" alt=""/>
 ![ReactJS](https://img.shields.io/badge/ReactJS-13cf35?style=for-the-badge&logo=react&logoColor=080808)
 ![Styled-Components](https://img.shields.io/badge/Styled-Components-61DAFB?style=for-the-badge&logo=styledcomponents&logoColor=61DAFB)
 ![NodeJS](https://img.shields.io/badge/NodeJS-F7DF1E?style=for-the-badge&logo=node.js&logoColor=080808)
 ![TypeScript](https://img.shields.io/badge/TypeScript-E4405F?style=for-the-badge&logo=typescript&logoColor=ffffff)
-![Mongodb](https://img.shields.io/badge/Mongodb-fae7b5?style=for-the-badge&logo=mongodb&logoColor=080808)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-78586f?style=for-the-badge&logo=PostgreSQL&logoColor=ffffff)
+![Prisma](https://img.shields.io/badge/Prisma-b57edc?style=for-the-badge&logo=Prisma&logoColor=ffffff)
+<img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt=""/>
+<img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt=""/>
 
 </p>
 
+ <h2>Functionalities</h2>
+  <ul>
+    <li> Explore the trending movies and tv-shows, adding the ones you want to watch to your wishlist</li>
+  <br>
+      <li>Add the books you've read to your reading list, searching by its title or author
+        <ul> 
+            <li>You can also rate them, update the reading date and write a personal review</li>
+        </ul>  
+      </li>
+  <br>
+        <li>Add the movies you've watched to your movie watching list, searching by its title
+        <ul> 
+            <li>You can also rate them, update the watching date and write a personal review</li>
+        </ul>  
+      </li>
+  <br>
+        <li>Add the tv-shows you've watched to your tv-show watching list, searching by its title
+        <ul> 
+            <li>You can also rate them, update the reading date and write a personal review</li>
+        </ul>  
+      </li>
+<br>
+  <li> Update and organize your books/movies/ts-shows wish-lists </li>
+  
+  </ul>
 
-## Available Scripts
 
-In the project directory, you can run:
+ <h2>How to run</h2>
 
-### `npm start`
+1. Clone this repository
+2. Install the dependencies (IDE/Bash/Terminal)
+RUN:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```docker compose up --build```
