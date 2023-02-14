@@ -1,7 +1,8 @@
-<div align="center"><img src="frontend/src/assets/img/newlogo.png" width="420px">
-<h1 margin-top="-100px"> </h1>
+<div align="center"><img src="frontend/src/assets/img/newlogo.png" width="220px">
+  <h2 padding-top="-100px">Organize your cultural life with Cine-Book Club!</h2>
+    <br>
+  <div align="center"><img src="frontend/src/assets/img/usage_example.png" width="100%">
 
-Organize your cultural life with Cine-Book Club!
   <br>
   </div>
 </div>
