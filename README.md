@@ -64,4 +64,4 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
 RUN:
 
 
-```docker compose up --build```
+```docker-compose up --build```
