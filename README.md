@@ -48,7 +48,7 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
   <br>
         <li>Add the tv-shows you've watched to your tv-show watching list, searching by its title
         <ul> 
-            <li>You can also rate them, update the reading date and write a personal review</li>
+            <li>You can also rate them, update the watching date and write a personal review</li>
         </ul>  
       </li>
 <br>
