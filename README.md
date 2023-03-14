@@ -32,27 +32,27 @@ You can currently acess Cine-Book Club at http://ec2-54-172-153-78.compute-1.ama
 
  <h2>Functionalities</h2>
   <ul>
-    <li> Explore the trending movies and tv-shows, adding the ones you want to watch to your wishlist</li>
+    <li>Explore the trending movies and tv-shows, adding the ones you want to watch to your wishlist</li>
   <br>
-      <li>Add the books you've read to your reading list, searching by its title or author
-        <ul> 
-            <li>You can also rate them, update the reading date and write a personal review</li>
-        </ul>  
-      </li>
+    <li>Add the books you've read to your reading list, searching by its title or author
+       <ul> 
+          <li>You can also rate them, update the reading date and write a personal review</li>
+       </ul>  
+    </li>
   <br>
-        <li>Add the movies you've watched to your movie watching list, searching by its title
-        <ul> 
-            <li>You can also rate them, update the watching date and write a personal review</li>
-        </ul>  
-      </li>
+    <li>Add the movies you've watched to your movie watching list, searching by its title
+       <ul> 
+          <li>You can also rate them, update the watching date and write a personal review</li>
+       </ul>  
+    </li>
   <br>
-        <li>Add the tv-shows you've watched to your tv-show watching list, searching by its title
-        <ul> 
-            <li>You can also rate them, update the watching date and write a personal review</li>
-        </ul>  
-      </li>
+    <li>Add the tv-shows you've watched to your tv-show watching list, searching by its title
+       <ul> 
+          <li>You can also rate them, update the watching date and write a personal review</li>
+       </ul>  
+    </li>
 <br>
-  <li> Update and organize your books/movies/ts-shows wish-lists </li>
+    <li>Update and organize your books/movies/ts-shows wish-lists</li>
   
   </ul>
 
